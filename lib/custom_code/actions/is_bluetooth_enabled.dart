@@ -13,14 +13,20 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 // Leveraged from https://blog.flutterflow.io/creating-an-app-for-interacting-with-any-iot-devices-using-ble/
 
 Future<bool> isBluetoothEnabled() async {
-  await FlutterBluePlus.isOn;
+  if (await FlutterBluePlus.isSupported == false) {
+    print("Bluetooth not supported by this device");
+    return false;
+  }
+
+  final state = await FlutterBluePlus.adapterState.first;
+  if (state == BluetoothAdapterState.on) {
+    return true;
+  }
   await Future.delayed(Duration(milliseconds: 100));
-  final state = await FlutterBluePlus.instance.state.first;
-  if (state == BluetoothState.on) {
+  if (state == BluetoothAdapterState.on) {
     return true;
   }
   return false;
 }
-
 // Set your action name, define your arguments and return parameter,
 // and then add the boilerplate code using the green button on the right!
