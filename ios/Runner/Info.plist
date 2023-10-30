@@ -64,6 +64,8 @@
     <string>QR codes may be read from your photo gallery. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
     <string>We leverage location information to identify if any of our services are available nearby.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+    <string>We may connect to a local bluetooth device to validate your credentials.</string>
 
 
 	<key>UILaunchStoryboardName</key>
