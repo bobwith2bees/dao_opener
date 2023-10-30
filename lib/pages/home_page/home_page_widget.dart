@@ -18,10 +18,11 @@ export 'home_page_model.dart';
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({
     Key? key,
-    required this.isBTEnabled,
-  }) : super(key: key);
+    bool? isBTEnabled,
+  })  : this.isBTEnabled = isBTEnabled ?? true,
+        super(key: key);
 
-  final bool? isBTEnabled;
+  final bool isBTEnabled;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -72,9 +73,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {
-        _model.isBluetoothEnabled = widget.isBTEnabled!;
+        _model.isBluetoothEnabled = widget.isBTEnabled;
       });
-      if (widget.isBTEnabled!) {
+      if (widget.isBTEnabled) {
         setState(() {
           _model.isFetchingDeices = true;
           _model.isFetchingConnectedDevices = true;
@@ -148,7 +149,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     style: FlutterFlowTheme.of(context).bodyLarge,
                   ),
                   Switch.adaptive(
-                    value: _model.switchValue ??= widget.isBTEnabled!,
+                    value: _model.switchValue ??= widget.isBTEnabled,
                     onChanged: (newValue) async {
                       setState(() => _model.switchValue = newValue!);
                     },
