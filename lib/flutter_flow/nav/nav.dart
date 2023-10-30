@@ -81,18 +81,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : HomePageWidget(),
+          appStateNotifier.loggedIn ? HomePageWidget() : SplashPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : HomePageWidget(),
+              appStateNotifier.loggedIn ? HomePageWidget() : SplashPageWidget(),
           routes: [
             FFRoute(
               name: 'HomePage',
               path: 'homePage',
-              builder: (context, params) => HomePageWidget(),
+              builder: (context, params) => HomePageWidget(
+                isBTEnabled: params.getParam('isBTEnabled', ParamType.bool),
+              ),
+            ),
+            FFRoute(
+              name: 'SplashPage',
+              path: 'splashPage',
+              builder: (context, params) => SplashPageWidget(),
+            ),
+            FFRoute(
+              name: 'DevicePage',
+              path: 'devicePage',
+              builder: (context, params) => DevicePageWidget(
+                deviceName: params.getParam('deviceName', ParamType.String),
+                deviceId: params.getParam('deviceId', ParamType.String),
+                deviceRssi: params.getParam('deviceRssi', ParamType.int),
+                hasWriteCharacteristic:
+                    params.getParam('hasWriteCharacteristic', ParamType.bool),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -261,7 +279,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/homePage';
+            return '/splashPage';
           }
           return null;
         },
