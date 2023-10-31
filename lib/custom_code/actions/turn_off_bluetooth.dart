@@ -8,11 +8,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-
 Future<bool> turnOffBluetooth() async {
-  if (isAndroid) {
-    return await FlutterBluePlus.instance.turnOff();
-  }
+  print('turnOffBluetooth - Deprecated OS feature.');
   return true;
 }
