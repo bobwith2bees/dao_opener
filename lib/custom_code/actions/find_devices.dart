@@ -55,13 +55,16 @@ Future<List<BTDeviceStruct>> findDevices() async {
   if (!isScanning) {
     print('findDevices - startScan');
     try {
-      await FlutterBluePlus.startScan(timeout: const Duration(seconds: 10));
+      // DevNote - This scan uses ACCESS_FINE_LOCATION because I don't know if FlutterFire can ass
+      // android:usesPermissionFlags="neverForLocation" to the BLUETOOTH_SCAN
+      await FlutterBluePlus.startScan(
+          timeout: const Duration(seconds: 10), androidUsesFineLocation: true);
     } on Exception catch (e) {
       print('findDevices - startScan exception: $e');
     }
   }
 
-  // FlutterBluePlus.startScan doesn't block so we need to wait for the stream to have results
+  // DevNote - FlutterBluePlus.startScan doesn't block so we need to wait for the stream to have results
   await Future.delayed(Duration(milliseconds: 5000));
   print('findDevices - found ${devices.length} devices in the first 5 seconds');
   await Future.delayed(Duration(seconds: 5));
