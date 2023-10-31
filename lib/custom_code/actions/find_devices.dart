@@ -12,12 +12,16 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 Future<List<BTDeviceStruct>> findDevices() async {
   print('findDevices - starting');
+  // Increase to see all the scan results
+  FlutterBluePlus.setLogLevel(LogLevel.debug, color: false);
+
   Set<DeviceIdentifier> seen = {};
   List<BTDeviceStruct> devices = [];
 
+  print('findDevices - setup listener _scanResultsSubscription');
   StreamSubscription<List<ScanResult>> _scanResultsSubscription =
       FlutterBluePlus.scanResults.listen((results) {
-    print('findDevices - results: ${results.length}');
+    // print('findDevices - results: ${results.length}');
     List<ScanResult> scannedDevices = [];
     for (ScanResult r in results) {
       if (r.device.platformName.isNotEmpty) {
@@ -32,8 +36,8 @@ Future<List<BTDeviceStruct>> findDevices() async {
     scannedDevices.sort((a, b) => b.rssi.compareTo(a.rssi));
     devices.clear();
     scannedDevices.forEach((deviceResult) {
-      print(
-          'getConnectedDevices - platformName: ${deviceResult..device.platformName}, remoteId" ${deviceResult.device.remoteId.toString()}, rssi: ${deviceResult.rssi}');
+      // print(
+      //     'getConnectedDevices - platformName: ${deviceResult.device.platformName}, remoteId: ${deviceResult.device.remoteId.toString()}, rssi: ${deviceResult.rssi}');
       devices.add(BTDeviceStruct(
         name: deviceResult.device.platformName,
         id: deviceResult.device.remoteId.toString(),
@@ -51,19 +55,17 @@ Future<List<BTDeviceStruct>> findDevices() async {
   if (!isScanning) {
     print('findDevices - startScan');
     try {
-      await FlutterBluePlus.startScan(
-        timeout: const Duration(seconds: 10),
-      );
+      await FlutterBluePlus.startScan(timeout: const Duration(seconds: 10));
     } on Exception catch (e) {
-      print('findDevices - $e');
+      print('findDevices - startScan exception: $e');
     }
   }
 
-  sleep(Duration(seconds: 5));
-  // Stop scanning
-  await FlutterBluePlus.stopScan();
-
-  print('findDevices - found ${devices.length} devices');
+  // FlutterBluePlus.startScan doesn't block so we need to wait for the stream to have results
+  await Future.delayed(Duration(milliseconds: 5000));
+  print('findDevices - found ${devices.length} devices in the first 5 seconds');
+  await Future.delayed(Duration(seconds: 5));
+  print('findDevices - found ${devices.length} devices after 5 more seconds');
 
   _scanResultsSubscription.cancel();
   return devices;
