@@ -466,7 +466,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       ),
                                                 ),
                                               ),
-                                              if (_model.isFetchingDeices)
+                                              if (!_model.isFetchingDeices)
                                                 InkWell(
                                                   splashColor:
                                                       Colors.transparent,
