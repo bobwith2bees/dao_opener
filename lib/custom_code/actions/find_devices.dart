@@ -15,42 +15,46 @@ Future<List<BTDeviceStruct>> findDevices() async {
   Set<DeviceIdentifier> seen = {};
 
   List<BTDeviceStruct> devices = [];
-  FlutterBluePlus.scanResults.listen(
-    (results) {
-      List<ScanResult> scannedDevices = [];
-      for (ScanResult r in results) {
-        if (r.device.platformName.isNotEmpty) {
-          if (seen.contains(r.device.remoteId) == false) {
-            print(
-                '${r.device.remoteId}: "${r.advertisementData.localName}" found! rssi: ${r.rssi}');
-            seen.add(r.device.remoteId);
-          }
-          scannedDevices.add(r);
+  FlutterBluePlus.scanResults.listen((results) {
+    print('findDevices - results: ${results.length}');
+    List<ScanResult> scannedDevices = [];
+    for (ScanResult r in results) {
+      if (r.device.platformName.isNotEmpty) {
+        if (seen.contains(r.device.remoteId) == false) {
+          print(
+              '${r.device.remoteId}: "${r.advertisementData.localName}" found! rssi: ${r.rssi}');
+          seen.add(r.device.remoteId);
         }
+        scannedDevices.add(r);
       }
-      scannedDevices.sort((a, b) => b.rssi.compareTo(a.rssi));
-      devices.clear();
-      scannedDevices.forEach((deviceResult) {
-        print(
-            'getConnectedDevices - platformName: ${deviceResult..device.platformName}, remoteId" ${deviceResult.device.remoteId.toString()}, rssi: ${deviceResult.rssi}');
-        devices.add(BTDeviceStruct(
-          name: deviceResult.device.platformName,
-          id: deviceResult.device.remoteId.toString(),
-          rssi: deviceResult.rssi,
-        ));
-      });
-    },
-  );
+    }
+    scannedDevices.sort((a, b) => b.rssi.compareTo(a.rssi));
+    devices.clear();
+    scannedDevices.forEach((deviceResult) {
+      print(
+          'getConnectedDevices - platformName: ${deviceResult..device.platformName}, remoteId" ${deviceResult.device.remoteId.toString()}, rssi: ${deviceResult.rssi}');
+      devices.add(BTDeviceStruct(
+        name: deviceResult.device.platformName,
+        id: deviceResult.device.remoteId.toString(),
+        rssi: deviceResult.rssi,
+      ));
+    });
+  });
 
   final isScanning = FlutterBluePlus.isScanningNow;
   if (!isScanning) {
-    await FlutterBluePlus.startScan(
-      timeout: const Duration(seconds: 5),
-    );
+    print('findDevices - startScan');
+    try {
+      await FlutterBluePlus.startScan(
+        timeout: const Duration(seconds: 10),
+      );
+    } on Exception catch (e) {
+      print('findDevices - $e');
+    }
   }
 
   // Stop scanning
-  await FlutterBluePlus.stopScan();
+  // await FlutterBluePlus.stopScan();
 
   print('findDevices - found ${devices.length} devices');
 
