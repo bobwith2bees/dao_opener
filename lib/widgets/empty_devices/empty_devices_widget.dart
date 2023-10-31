@@ -11,10 +11,11 @@ export 'empty_devices_model.dart';
 class EmptyDevicesWidget extends StatefulWidget {
   const EmptyDevicesWidget({
     Key? key,
-    required this.text,
-  }) : super(key: key);
+    String? text,
+  })  : this.text = text ?? 'No Devices Found',
+        super(key: key);
 
-  final String? text;
+  final String text;
 
   @override
   _EmptyDevicesWidgetState createState() => _EmptyDevicesWidgetState();
@@ -51,7 +52,7 @@ class _EmptyDevicesWidgetState extends State<EmptyDevicesWidget> {
       child: Align(
         alignment: AlignmentDirectional(0.00, 0.00),
         child: Text(
-          widget.text!,
+          widget.text,
           style: FlutterFlowTheme.of(context).labelMedium,
         ),
       ),

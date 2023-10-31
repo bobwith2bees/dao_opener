@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/widgets/empty_devices/empty_devices_widget.dart';
+import '/widgets/strength_indicator/strength_indicator_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
@@ -55,6 +57,10 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   List<BTDeviceStruct>? devices;
   // State field(s) for Switch widget.
   bool? switchValue;
+  // Stores action output result for [Custom Action - turnOnBluetooth] action in Switch widget.
+  bool? isTurningOn;
+  // Stores action output result for [Custom Action - turnOffBluetooth] action in Switch widget.
+  bool? isTurningOff;
 
   /// Initialization and disposal methods.
 
