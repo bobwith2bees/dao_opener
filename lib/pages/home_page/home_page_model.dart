@@ -63,6 +63,8 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   List<BTDeviceStruct>? foundDeviceList;
   // Stores action output result for [Custom Action - turnOffBluetooth] action in Switch widget.
   bool? isTurningOff;
+  // Stores action output result for [Custom Action - findDevices] action in Icon widget.
+  List<BTDeviceStruct>? findDevicesListReload;
 
   /// Initialization and disposal methods.
 

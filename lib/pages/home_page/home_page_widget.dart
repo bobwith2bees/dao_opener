@@ -467,12 +467,36 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 ),
                                               ),
                                               if (_model.isFetchingDeices)
-                                                Icon(
-                                                  Icons.refresh_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 22.0,
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    _model.findDevicesListReload =
+                                                        await actions
+                                                            .findDevices();
+                                                    setState(() {
+                                                      _model.foundDevices = _model
+                                                          .findDevicesListReload!
+                                                          .toList()
+                                                          .cast<
+                                                              BTDeviceStruct>();
+                                                    });
+
+                                                    setState(() {});
+                                                  },
+                                                  child: Icon(
+                                                    Icons.refresh_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 22.0,
+                                                  ),
                                                 ),
                                               if (_model.isFetchingDeices)
                                                 Text(
@@ -593,10 +617,19 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             0.0),
                                                                         child:
                                                                             Text(
-                                                                          'Sample IoT Device',
+                                                                          displayFoundDevicesItem
+                                                                              .name,
                                                                           style:
                                                                               FlutterFlowTheme.of(context).bodyLarge,
                                                                         ),
+                                                                      ),
+                                                                      StrengthIndicatorWidget(
+                                                                        key: Key(
+                                                                            'Key0ft_${displayFoundDevicesIndex}_of_${displayFoundDevices.length}'),
+                                                                        rssi: displayFoundDevicesItem
+                                                                            .rssi,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .success,
                                                                       ),
                                                                     ],
                                                                   ),
@@ -608,7 +641,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             0.0,
                                                                             0.0),
                                                                     child: Text(
-                                                                      'IHDVS-DSVDSV-SDBVSDB',
+                                                                      displayFoundDevicesItem
+                                                                          .id,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .labelSmall,
