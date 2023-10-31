@@ -1,8 +1,12 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/instant_timer.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,6 +45,29 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
     super.initState();
     _model = createModel(context, () => DevicePageModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.currentRssi = widget.deviceRssi;
+      });
+      _model.rssiUpdateTimer = InstantTimer.periodic(
+        duration: Duration(milliseconds: 2000),
+        callback: (timer) async {
+          _model.updatedRssi = await actions.getRssi(
+            BTDeviceStruct(
+              name: widget.deviceName,
+              id: widget.deviceId,
+              rssi: widget.deviceRssi,
+            ),
+          );
+          setState(() {
+            _model.currentRssi = _model.updatedRssi;
+          });
+        },
+        startImmediately: true,
+      );
+    });
+
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
   }
@@ -75,109 +102,53 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
           iconTheme:
               IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
           automaticallyImplyLeading: true,
-          actions: [
-            Container(
-              height: 200.0,
-              decoration: BoxDecoration(),
-              child: Column(
+          title: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Row(
+                  Column(
                     mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                        child: Text(
-                          widget.deviceName,
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: Text(
+                              widget.deviceName,
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
                                     fontFamily: 'Inter',
                                     fontSize: 18.0,
                                   ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 10.0, 0.0),
-                                child: Text(
-                                  widget.deviceName,
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        fontSize: 18.0,
-                                      ),
-                                ),
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 10.0, 0.0),
-                                        child: Text(
-                                          widget.deviceName,
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleLarge
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                fontSize: 18.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 5.0, 0.0, 0.0),
-                                    child: Text(
-                                      widget.deviceId,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelSmall,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 5.0, 0.0, 0.0),
-                            child: Text(
-                              widget.deviceId,
-                              style: FlutterFlowTheme.of(context).labelSmall,
                             ),
                           ),
                         ],
                       ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                        child: Text(
+                          widget.deviceId,
+                          style: FlutterFlowTheme.of(context).labelSmall,
+                        ),
+                      ),
                     ],
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                    child: Text(
-                      widget.deviceId,
-                      style: FlutterFlowTheme.of(context).labelSmall,
-                    ),
                   ),
                 ],
               ),
-            ),
+            ],
+          ),
+          actions: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
               child: Row(
@@ -285,8 +256,29 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
                             size: 24.0,
                           ),
                           showLoadingIndicator: true,
-                          onPressed: () {
-                            print('SendButton pressed ...');
+                          onPressed: () async {
+                            await actions.sendData(
+                              BTDeviceStruct(
+                                name: widget.deviceName,
+                                id: widget.deviceId,
+                                rssi: widget.deviceRssi,
+                              ),
+                              _model.textController.text,
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Data send to device.',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
                           },
                         ),
                       ),
@@ -300,21 +292,7 @@ class _DevicePageWidgetState extends State<DevicePageWidget> {
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 10.0, 0.0),
-                          child: Text(
-                            widget.deviceName,
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Inter',
-                                  fontSize: 18.0,
-                                ),
-                          ),
-                        ),
-                      ],
+                      children: [],
                     ),
                   ],
                 ),
