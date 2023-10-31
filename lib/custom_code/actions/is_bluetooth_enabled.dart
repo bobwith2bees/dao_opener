@@ -19,12 +19,20 @@ Future<bool> isBluetoothEnabled() async {
     return false;
   }
 
-  final state = await FlutterBluePlus.adapterState.first;
+  BluetoothAdapterState state = await FlutterBluePlus.adapterState.first;
   if (state == BluetoothAdapterState.on) {
     print('isBluetoothEnabled - true');
     return true;
   }
-  await Future.delayed(Duration(milliseconds: 100));
+
+  if (isAndroid) {
+    print('isBluetoothEnabled - Android call to turnOn Bluetooth');
+    await FlutterBluePlus.turnOn();
+  }
+
+  await Future.delayed(Duration(milliseconds: 300));
+  state = await FlutterBluePlus.adapterState.first;
+
   if (state == BluetoothAdapterState.on) {
     print('isBluetoothEnabled - true (after retry)');
     return true;

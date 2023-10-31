@@ -59,6 +59,8 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   bool? switchValue;
   // Stores action output result for [Custom Action - turnOnBluetooth] action in Switch widget.
   bool? isTurningOn;
+  // Stores action output result for [Custom Action - findDevices] action in Switch widget.
+  List<BTDeviceStruct>? foundDeviceList;
   // Stores action output result for [Custom Action - turnOffBluetooth] action in Switch widget.
   bool? isTurningOff;
 

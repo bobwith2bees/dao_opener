@@ -13,9 +13,10 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 Future<List<BTDeviceStruct>> findDevices() async {
   print('findDevices - starting');
   Set<DeviceIdentifier> seen = {};
-
   List<BTDeviceStruct> devices = [];
-  FlutterBluePlus.scanResults.listen((results) {
+
+  StreamSubscription<List<ScanResult>> _scanResultsSubscription =
+      FlutterBluePlus.scanResults.listen((results) {
     print('findDevices - results: ${results.length}');
     List<ScanResult> scannedDevices = [];
     for (ScanResult r in results) {
@@ -39,6 +40,11 @@ Future<List<BTDeviceStruct>> findDevices() async {
         rssi: deviceResult.rssi,
       ));
     });
+  }, onError: (err, stack) {
+    print(
+        'getConnectedDevices - _scanResultsSubscription the stream had an error $err, $stack');
+  }, onDone: () {
+    print('getConnectedDevices - _scanResultsSubscription stream is done :)');
   });
 
   final isScanning = FlutterBluePlus.isScanningNow;
@@ -53,10 +59,12 @@ Future<List<BTDeviceStruct>> findDevices() async {
     }
   }
 
+  sleep(Duration(seconds: 5));
   // Stop scanning
-  // await FlutterBluePlus.stopScan();
+  await FlutterBluePlus.stopScan();
 
   print('findDevices - found ${devices.length} devices');
 
+  _scanResultsSubscription.cancel();
   return devices;
 }

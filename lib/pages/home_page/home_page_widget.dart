@@ -161,6 +161,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         setState(() {
                           _model.isBluetoothEnabled = true;
                         });
+                        _model.foundDeviceList = await actions.findDevices();
+                        setState(() {
+                          _model.foundDevices = _model.foundDeviceList!
+                              .toList()
+                              .cast<BTDeviceStruct>();
+                        });
 
                         setState(() {});
                       } else {
@@ -181,10 +187,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         FlutterFlowTheme.of(context).secondaryText,
                   ),
                 ],
-              ),
-              Text(
-                'Bluetooth Demo',
-                style: FlutterFlowTheme.of(context).titleLarge,
               ),
               Divider(
                 thickness: 0.5,
@@ -642,7 +644,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           ),
                         ],
                       ),
-                    if (_model.isBluetoothEnabled)
+                    if (!_model.isBluetoothEnabled)
                       Container(
                         width: double.infinity,
                         height: double.infinity,
