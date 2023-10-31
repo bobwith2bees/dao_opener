@@ -11,24 +11,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 Future<List<BTDeviceStruct>> findDevices() async {
+  print('findDevices - starting');
+  Set<DeviceIdentifier> seen = {};
+
   List<BTDeviceStruct> devices = [];
-  FlutterBluePlus.scanResults.listen((results) {
-    List<ScanResult> scannedDevices = [];
-    for (ScanResult r in results) {
-      if (r.device.name.isNotEmpty) {
-        scannedDevices.add(r);
+  FlutterBluePlus.scanResults.listen(
+    (results) {
+      List<ScanResult> scannedDevices = [];
+      for (ScanResult r in results) {
+        if (r.device.platformName.isNotEmpty) {
+          if (seen.contains(r.device.remoteId) == false) {
+            print(
+                '${r.device.remoteId}: "${r.advertisementData.localName}" found! rssi: ${r.rssi}');
+            seen.add(r.device.remoteId);
+          }
+          scannedDevices.add(r);
+        }
       }
-    }
-    scannedDevices.sort((a, b) => b.rssi.compareTo(a.rssi));
-    devices.clear();
-    scannedDevices.forEach((deviceResult) {
-      devices.add(BTDeviceStruct(
-        name: deviceResult.device.name,
-        id: deviceResult.device.id.toString(),
-        rssi: deviceResult.rssi,
-      ));
-    });
-  });
+      scannedDevices.sort((a, b) => b.rssi.compareTo(a.rssi));
+      devices.clear();
+      scannedDevices.forEach((deviceResult) {
+        print(
+            'getConnectedDevices - platformName: ${deviceResult..device.platformName}, remoteId" ${deviceResult.device.remoteId.toString()}, rssi: ${deviceResult.rssi}');
+        devices.add(BTDeviceStruct(
+          name: deviceResult.device.platformName,
+          id: deviceResult.device.remoteId.toString(),
+          rssi: deviceResult.rssi,
+        ));
+      });
+    },
+  );
+
   final isScanning = FlutterBluePlus.isScanningNow;
   if (!isScanning) {
     await FlutterBluePlus.startScan(
@@ -36,7 +49,10 @@ Future<List<BTDeviceStruct>> findDevices() async {
     );
   }
 
+  // Stop scanning
+  await FlutterBluePlus.stopScan();
+
+  print('findDevices - found ${devices.length} devices');
+
   return devices;
 }
-// Set your action name, define your arguments and return parameter,
-// and then add the boilerplate code using the green button on the right!
