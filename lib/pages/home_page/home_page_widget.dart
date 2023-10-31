@@ -160,12 +160,24 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             const Duration(milliseconds: 1000));
                         setState(() {
                           _model.isBluetoothEnabled = true;
+                          _model.isFetchingDeices = true;
+                          _model.isFetchingConnectedDevices = true;
                         });
-                        _model.foundDeviceList = await actions.findDevices();
+                        _model.fetchedConnectedDevicesOn =
+                            await actions.getConnectedDevices();
                         setState(() {
-                          _model.foundDevices = _model.foundDeviceList!
+                          _model.foundDevices = _model
+                              .fetchedConnectedDevicesOn!
                               .toList()
                               .cast<BTDeviceStruct>();
+                          _model.isFetchingConnectedDevices = false;
+                        });
+                        _model.findDevicesListOn = await actions.findDevices();
+                        setState(() {
+                          _model.connnectedDevices = _model.findDevicesListOn!
+                              .toList()
+                              .cast<BTDeviceStruct>();
+                          _model.isFetchingDeices = false;
                         });
 
                         setState(() {});
@@ -554,10 +566,46 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
-                                                        await actions
-                                                            .connectDevice(
+                                                        _model.hasWrite =
+                                                            await actions
+                                                                .connectDevice(
                                                           displayFoundDevicesItem,
                                                         );
+                                                        setState(() {
+                                                          _model.addToConnnectedDevices(
+                                                              displayFoundDevicesItem);
+                                                        });
+
+                                                        context.pushNamed(
+                                                          'DevicePage',
+                                                          queryParameters: {
+                                                            'deviceName':
+                                                                serializeParam(
+                                                              displayFoundDevicesItem
+                                                                  .name,
+                                                              ParamType.String,
+                                                            ),
+                                                            'deviceId':
+                                                                serializeParam(
+                                                              displayFoundDevicesItem
+                                                                  .id,
+                                                              ParamType.String,
+                                                            ),
+                                                            'deviceRssi':
+                                                                serializeParam(
+                                                              displayFoundDevicesItem
+                                                                  .rssi,
+                                                              ParamType.int,
+                                                            ),
+                                                            'hasWriteCharacteristic':
+                                                                serializeParam(
+                                                              _model.hasWrite,
+                                                              ParamType.bool,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+
+                                                        setState(() {});
                                                       },
                                                       child: Container(
                                                         width: double.infinity,
