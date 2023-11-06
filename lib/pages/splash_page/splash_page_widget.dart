@@ -33,18 +33,6 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(bluetoothPermission);
       _model.bluetoothEnabled = await actions.isBluetoothEnabled();
-      if (Navigator.of(context).canPop()) {
-        context.pop();
-      }
-      context.pushNamed(
-        'HomePage',
-        queryParameters: {
-          'isBTEnabled': serializeParam(
-            _model.bluetoothEnabled,
-            ParamType.bool,
-          ),
-        }.withoutNulls,
-      );
     });
   }
 
@@ -77,7 +65,7 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            'Verifying Permissions',
+            'DAO Helper',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
                   color: Colors.white,
@@ -93,6 +81,62 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              if (_model.bluetoothEnabled ?? true)
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed('BluetoothPage');
+                    },
+                    text: 'Bluetooth Page',
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter',
+                                color: Colors.white,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    context.pushNamed('PolygonIdPage');
+                  },
+                  text: 'PolygonID Page',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Inter',
+                          color: Colors.white,
+                        ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
               Expanded(
                 child: Container(
                   width: double.infinity,
