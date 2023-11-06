@@ -1,3 +1,5 @@
+import '/custom_code/actions/index.dart' as actions;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +23,10 @@ void main() async {
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
+
+  // Start final custom actions code
+  await actions.initPolygonSdk();
+  // End final custom actions code
 
   runApp(MyApp());
 }

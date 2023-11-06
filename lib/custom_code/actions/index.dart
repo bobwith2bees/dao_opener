@@ -8,3 +8,4 @@ export 'send_data.dart' show sendData;
 export 'receive_data.dart' show receiveData;
 export 'turn_on_bluetooth.dart' show turnOnBluetooth;
 export 'turn_off_bluetooth.dart' show turnOffBluetooth;
+export 'init_polygon_sdk.dart' show initPolygonSdk;
