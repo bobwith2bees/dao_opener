@@ -80,19 +80,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : SplashPageWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? BluetoothPageWidget()
+          : SplashPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : SplashPageWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? BluetoothPageWidget()
+              : SplashPageWidget(),
           routes: [
             FFRoute(
-              name: 'HomePage',
-              path: 'homePage',
-              builder: (context, params) => HomePageWidget(
+              name: 'BluetoothPage',
+              path: 'bluetoothPage',
+              builder: (context, params) => BluetoothPageWidget(
                 isBTEnabled: params.getParam('isBTEnabled', ParamType.bool),
               ),
             ),
@@ -111,6 +113,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 hasWriteCharacteristic:
                     params.getParam('hasWriteCharacteristic', ParamType.bool),
               ),
+            ),
+            FFRoute(
+              name: 'PolygonIdPage',
+              path: 'polygonIdPage',
+              builder: (context, params) => PolygonIdPageWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
