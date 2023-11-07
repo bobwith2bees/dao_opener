@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
+import 'package:polygonid_flutter_sdk/identity/domain/entities/private_identity_entity.dart';
 
 Future<dynamic> addIdentity(String? secretKey) async {
   PrivateIdentityEntity identity = await PolygonIdSdk.I.identity.addIdentity(
