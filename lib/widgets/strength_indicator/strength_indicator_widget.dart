@@ -48,6 +48,8 @@ class _StrengthIndicatorWidgetState extends State<StrengthIndicatorWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       decoration: BoxDecoration(),
       child: Padding(

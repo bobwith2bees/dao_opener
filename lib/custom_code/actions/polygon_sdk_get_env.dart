@@ -10,12 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
 
-Future initPolygonSdk() async {
-  print('initPolygonSdk - starting');
-  await PolygonIdSdk.init();
-  print('initPolygonSdk - completed');
+Future polygonSdkGetEnv() async {
+  PolygonIdSdk.I.getEnv();
   return;
 }
-
-// Set your action name, define your arguments and return parameter,
-// and then add the boilerplate code using the green button on the right!
