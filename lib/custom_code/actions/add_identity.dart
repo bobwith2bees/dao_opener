@@ -10,12 +10,9 @@ import 'package:flutter/material.dart';
 
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
 
-Future initPolygonSdk() async {
-  print('initPolygonSdk - starting');
-  await PolygonIdSdk.init();
-  print('initPolygonSdk - completed');
-  return;
+Future<dynamic> addIdentity(String? secretKey) async {
+  PrivateIdentityEntity identity = await PolygonIdSdk.I.identity.addIdentity(
+    secret: secretKey,
+  );
+  return identity.toJson;
 }
-
-// Set your action name, define your arguments and return parameter,
-// and then add the boilerplate code using the green button on the right!

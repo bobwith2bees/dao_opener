@@ -9,3 +9,6 @@ export 'receive_data.dart' show receiveData;
 export 'turn_on_bluetooth.dart' show turnOnBluetooth;
 export 'turn_off_bluetooth.dart' show turnOffBluetooth;
 export 'init_polygon_sdk.dart' show initPolygonSdk;
+export 'polygon_sdk_get_env.dart' show polygonSdkGetEnv;
+export 'add_identity.dart' show addIdentity;
+export 'create_identity.dart' show createIdentity;
