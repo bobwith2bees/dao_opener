@@ -9,12 +9,18 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
+import 'package:polygonid_flutter_sdk/identity/domain/entities/private_identity_entity.dart';
 
-Future<dynamic> createIdentity(String? secret) async {
-  final sdk = PolygonIdSdk.I;
-
-  PrivateIdentityEntity identity =
-      await sdk.identity.createIdentity(secret: secretKey);
-
-  return identity.toJson;
+Future<String> getDidIdentifier(
+  String privateKey,
+  String blockchain,
+  String network,
+) async {
+  print('getDidIdentifier -');
+  String didIdentifier = await PolygonIdSdk.I.identity.getDidIdentifier(
+    privateKey: privateKey,
+    blockchain: blockchain,
+    network: network,
+  );
+  return didIdentifier;
 }

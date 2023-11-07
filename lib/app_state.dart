@@ -51,6 +51,18 @@ class FFAppState extends ChangeNotifier {
   void deletePrivateIdentityEntity() {
     secureStorage.delete(key: 'ff_privateIdentityEntity');
   }
+
+  String _idendityPrivateKey = '';
+  String get idendityPrivateKey => _idendityPrivateKey;
+  set idendityPrivateKey(String _value) {
+    _idendityPrivateKey = _value;
+  }
+
+  String _identityGenesisId = '';
+  String get identityGenesisId => _identityGenesisId;
+  set identityGenesisId(String _value) {
+    _identityGenesisId = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
