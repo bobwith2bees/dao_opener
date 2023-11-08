@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -92,62 +91,46 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Enable Bluetooth',
-                    style: FlutterFlowTheme.of(context).bodyLarge,
-                  ),
-                  Switch.adaptive(
-                    value: _model.switchValue ??= widget.isBTEnabled!,
-                    onChanged: (newValue) async {
-                      setState(() => _model.switchValue = newValue!);
-                      if (newValue!) {
-                        _model.isTurningOn = await actions.turnOnBluetooth();
-                        await Future.delayed(
-                            const Duration(milliseconds: 1000));
-                        setState(() {});
-                        _model.fetchedConnectedDevicesOn =
-                            await actions.getConnectedDevices();
-                        setState(() {});
-                        _model.findDevicesListOn = await actions.findDevices();
-                        setState(() {});
-
-                        setState(() {});
-                      } else {
-                        _model.isTurningOff = await actions.turnOffBluetooth();
-                        await Future.delayed(
-                            const Duration(milliseconds: 1000));
-                        setState(() {});
-
-                        setState(() {});
-                      }
-                    },
-                    activeColor: FlutterFlowTheme.of(context).primary,
-                    activeTrackColor: FlutterFlowTheme.of(context).accent1,
-                    inactiveTrackColor: FlutterFlowTheme.of(context).alternate,
-                    inactiveThumbColor:
-                        FlutterFlowTheme.of(context).secondaryText,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 0.0, 0.0),
-                      child: Text(
-                        'ID Status',
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0.00, 0.00),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 0.0, 0.0),
+                        child: Text(
+                          FFAppState().identityGenesisId,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    Align(
+                      alignment: AlignmentDirectional(0.00, 0.00),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 0.0, 0.0),
+                        child: Text(
+                          FFAppState().identityBlockchain,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.00, 0.00),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 0.0, 0.0),
+                        child: Text(
+                          FFAppState().identityNetwork,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Divider(
                 thickness: 1.0,
@@ -156,8 +139,12 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    _model.addIdentityJson = await actions.addIdentity(
+                      null,
+                    );
+
+                    setState(() {});
                   },
                   text: 'Create Identity',
                   options: FFButtonOptions(

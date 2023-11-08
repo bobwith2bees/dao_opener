@@ -63,6 +63,18 @@ class FFAppState extends ChangeNotifier {
   set identityGenesisId(String _value) {
     _identityGenesisId = _value;
   }
+
+  String _identityBlockchain = '';
+  String get identityBlockchain => _identityBlockchain;
+  set identityBlockchain(String _value) {
+    _identityBlockchain = _value;
+  }
+
+  String _identityNetwork = '';
+  String get identityNetwork => _identityNetwork;
+  set identityNetwork(String _value) {
+    _identityNetwork = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
