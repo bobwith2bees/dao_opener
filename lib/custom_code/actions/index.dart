@@ -1,4 +1,5 @@
 export 'is_bluetooth_enabled.dart' show isBluetoothEnabled;
+export 'remove_identity.dart' show removeIdentity;
 export 'find_devices.dart' show findDevices;
 export 'connect_device.dart' show connectDevice;
 export 'get_connected_devices.dart' show getConnectedDevices;
@@ -12,3 +13,4 @@ export 'init_polygon_sdk.dart' show initPolygonSdk;
 export 'polygon_sdk_get_env.dart' show polygonSdkGetEnv;
 export 'add_identity.dart' show addIdentity;
 export 'get_did_identifier.dart' show getDidIdentifier;
+export 'check_identity.dart' show checkIdentity;
