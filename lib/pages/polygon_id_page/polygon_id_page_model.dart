@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,16 +15,8 @@ class PolygonIdPageModel extends FlutterFlowModel<PolygonIdPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for Switch widget.
-  bool? switchValue;
-  // Stores action output result for [Custom Action - turnOnBluetooth] action in Switch widget.
-  bool? isTurningOn;
-  // Stores action output result for [Custom Action - getConnectedDevices] action in Switch widget.
-  List<BTDeviceStruct>? fetchedConnectedDevicesOn;
-  // Stores action output result for [Custom Action - findDevices] action in Switch widget.
-  List<BTDeviceStruct>? findDevicesListOn;
-  // Stores action output result for [Custom Action - turnOffBluetooth] action in Switch widget.
-  bool? isTurningOff;
+  // Stores action output result for [Custom Action - addIdentity] action in Button widget.
+  dynamic? addIdentityJson;
 
   /// Initialization and disposal methods.
 
