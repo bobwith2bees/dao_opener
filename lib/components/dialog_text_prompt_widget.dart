@@ -67,8 +67,8 @@ class _DialogTextPromptWidgetState extends State<DialogTextPromptWidget> {
     return Align(
       alignment: AlignmentDirectional(0.00, 0.00),
       child: Container(
-        width: 400.0,
-        height: 300.0,
+        width: MediaQuery.sizeOf(context).width * 0.8,
+        height: 20.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
         ),
