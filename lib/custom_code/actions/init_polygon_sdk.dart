@@ -1,4 +1,6 @@
 // Automatic FlutterFlow imports
+import 'dart:ffi';
+
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
@@ -51,25 +53,50 @@ Future initPolygonSdk() async {
   print('initPolygonSdk - get EnvEntity');
   EnvEntity envEntity = await PolygonIdSdk.I.getEnv();
   // print('initPolygonSdk - $envEntity');
-
-  print('initPolygonSdk - create identity');
-  PrivateIdentityEntity identity = await sdk.identity.addIdentity();
-  // Save identity to AppState
+  // Save a copy in App State for all pages to use  (not persistent)
   FFAppState().update(() {
-    FFAppState().privateIdentityEntity = identity.toJson();
+    FFAppState().identityBlockchain = envEntity.blockchain;
+  });
+  FFAppState().update(() {
+    FFAppState().identityNetwork = envEntity.network;
   });
 
+  PrivateIdentityEntity identity;
+  Map<String, dynamic>? identityJson = FFAppState().privateIdentityEntity;
+  if (identityJson != null) {
+    print('initPolygonSdk - Existing Identity found. $identityJson');
+
+    try {
+      // Workaround for casting error in fromJson
+      Map<BigInt, String> profiles = Map.castFrom(identityJson['profiles']);
+
+      identity = PrivateIdentityEntity(
+        did: identityJson['did'],
+        publicKey: List<String>.from(identityJson['publicKey']),
+        profiles: profiles,
+        //profiles: {BigInt.parse('0'): 'did:polygonid:polygon:mumbai:2qGppaE54V4GtDp8eLFAqn42VeGkUwW9aJK6f6HwfB'},
+        privateKey: identityJson['privateKey'],
+      );
+    } catch (e) {
+      print('initPolygonSdk - Failed to load existing identity: $e');
+      identity = await sdk.identity.addIdentity();
+    }
+  } else {
+    print('initPolygonSdk - create identity (first run?)');
+    identity = await sdk.identity.addIdentity();
+    // Save identity to AppState
+    FFAppState().update(() {
+      FFAppState().privateIdentityEntity = identity.toJson();
+    });
+  }
+
   String privateKey = identity.privateKey;
-  String identifier = await sdk.identity.getDidIdentifier(
-    privateKey: privateKey,
-    blockchain: env.blockchain,
-    network: env.network,
-  );
   FFAppState().update(() {
-    FFAppState().privateKey = privateKey;
+    FFAppState().idendityPrivateKey = privateKey;
   });
 
   print('initPolygonSdk - capture genesisDid');
+  // DevNote TODO: Make an extension to the Identity class for a genesisDid getter
   String? genesisDid = await sdk.identity.getDidIdentifier(
     privateKey: privateKey,
     blockchain: envEntity.blockchain,
@@ -77,7 +104,7 @@ Future initPolygonSdk() async {
     profileNonce: null, // genesisDid has no Nonce
   );
   FFAppState().update(() {
-    FFAppState().genesisDid = genesisDid;
+    FFAppState().identityGenesisId = genesisDid;
   });
 
   print('initPolygonSdk - privateKey: $privateKey, genesisDid $genesisDid');
