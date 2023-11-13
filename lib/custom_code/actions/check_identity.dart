@@ -13,7 +13,8 @@ import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
 import 'package:polygonid_flutter_sdk/identity/domain/entities/private_identity_entity.dart';
 
 Future<bool> checkIdentity(String secret) async {
-  return PolygonIdSdk.I.identity.checkIdentityValidity(
+  PolygonIdSdk.I.identity.checkIdentityValidity(
     secret: secret,
   );
+  return true;
 }
