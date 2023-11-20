@@ -82,7 +82,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
           child: SizedBox(
             width: 50.0,
             height: 50.0,
-            child: SpinKitThreeBounce(
+            child: SpinKitPulse(
               color: FlutterFlowTheme.of(context).primary,
               size: 50.0,
             ),
