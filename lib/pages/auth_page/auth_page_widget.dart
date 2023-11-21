@@ -730,7 +730,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                                           }
 
                                                           context.goNamedAuth(
-                                                              'BluetoothPage',
+                                                              'SplashPage',
                                                               context.mounted);
                                                         },
                                                         text: 'Get Started',
@@ -862,7 +862,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                                                     }
 
                                                                     context.goNamedAuth(
-                                                                        'BluetoothPage',
+                                                                        'SplashPage',
                                                                         context
                                                                             .mounted);
                                                                   },
@@ -944,7 +944,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                                                           }
 
                                                                           context.goNamedAuth(
-                                                                              'BluetoothPage',
+                                                                              'SplashPage',
                                                                               context.mounted);
                                                                         },
                                                                         text:
@@ -1323,7 +1323,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                                           }
 
                                                           context.goNamedAuth(
-                                                              'BluetoothPage',
+                                                              'SplashPage',
                                                               context.mounted);
                                                         },
                                                         text: 'Sign In',
@@ -1441,7 +1441,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                                               }
 
                                                               context.goNamedAuth(
-                                                                  'BluetoothPage',
+                                                                  'SplashPage',
                                                                   context
                                                                       .mounted);
                                                             },
@@ -1528,7 +1528,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                                                     }
 
                                                                     context.goNamedAuth(
-                                                                        'BluetoothPage',
+                                                                        'SplashPage',
                                                                         context
                                                                             .mounted);
                                                                   },
@@ -1616,7 +1616,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                                                           }
 
                                                           context.goNamedAuth(
-                                                              'BluetoothPage',
+                                                              'SplashPage',
                                                               context.mounted);
                                                         },
                                                         text:
