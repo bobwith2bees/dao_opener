@@ -83,16 +83,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? BluetoothPageWidget()
-          : SplashPageWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? SplashPageWidget() : AuthPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? BluetoothPageWidget()
-              : SplashPageWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? SplashPageWidget() : AuthPageWidget(),
           routes: [
             FFRoute(
               name: 'BluetoothPage',
@@ -309,7 +307,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/splashPage';
+            return '/authPage';
           }
           return null;
         },
