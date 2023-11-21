@@ -5,4 +5,8 @@ npm install
 # https://firebase.google.com/docs/functions/local-emulator
 npm install -g firebase-tools
 
-#ls
+# Test locally e.g. http://127.0.0.1:5001/fifthpint-common-dev/us-central1/pass
+npm run serve
+
+# Deploy
+firebase deploy --only functions:pass
