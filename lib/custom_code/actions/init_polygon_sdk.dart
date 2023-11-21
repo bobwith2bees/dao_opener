@@ -66,7 +66,7 @@ Future initPolygonSdk() async {
     network: env.network,
   );
   FFAppState().update(() {
-    FFAppState().privateKey = privateKey;
+    FFAppState().idendityPrivateKey = privateKey;
   });
 
   print('initPolygonSdk - capture genesisDid');
@@ -77,7 +77,7 @@ Future initPolygonSdk() async {
     profileNonce: null, // genesisDid has no Nonce
   );
   FFAppState().update(() {
-    FFAppState().genesisDid = genesisDid;
+    FFAppState().identityGenesisId = genesisDid;
   });
 
   print('initPolygonSdk - privateKey: $privateKey, genesisDid $genesisDid');
