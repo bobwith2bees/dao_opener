@@ -82,7 +82,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
           child: SizedBox(
             width: 50.0,
             height: 50.0,
-            child: SpinKitThreeBounce(
+            child: SpinKitPulse(
               color: FlutterFlowTheme.of(context).primary,
               size: 50.0,
             ),
@@ -128,6 +128,10 @@ final parametersBuilderMap =
         },
       ),
   'PolygonIdPage': ParameterData.none(),
+  'CreateEvent': ParameterData.none(),
+  'AuthPage': ParameterData.none(),
+  'SettingsPage': ParameterData.none(),
+  'ProfilePage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
