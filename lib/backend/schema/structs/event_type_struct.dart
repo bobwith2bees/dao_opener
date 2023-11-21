@@ -23,7 +23,7 @@ class EventTypeStruct extends FFFirebaseStruct {
     String? beaconUUID,
     bool? nfcSupported,
     FoodOptions? food,
-    BarOptions? bar,
+    BarOptions? drink,
     String? parking,
     VenueType? venueType,
     EventType? eventType,
@@ -40,7 +40,7 @@ class EventTypeStruct extends FFFirebaseStruct {
         _beaconUUID = beaconUUID,
         _nfcSupported = nfcSupported,
         _food = food,
-        _bar = bar,
+        _drink = drink,
         _parking = parking,
         _venueType = venueType,
         _eventType = eventType,
@@ -120,11 +120,11 @@ class EventTypeStruct extends FFFirebaseStruct {
   set food(FoodOptions? val) => _food = val;
   bool hasFood() => _food != null;
 
-  // "bar" field.
-  BarOptions? _bar;
-  BarOptions? get bar => _bar;
-  set bar(BarOptions? val) => _bar = val;
-  bool hasBar() => _bar != null;
+  // "drink" field.
+  BarOptions? _drink;
+  BarOptions? get drink => _drink;
+  set drink(BarOptions? val) => _drink = val;
+  bool hasDrink() => _drink != null;
 
   // "parking" field.
   String? _parking;
@@ -160,7 +160,7 @@ class EventTypeStruct extends FFFirebaseStruct {
         beaconUUID: data['beaconUUID'] as String?,
         nfcSupported: data['nfcSupported'] as bool?,
         food: deserializeEnum<FoodOptions>(data['food']),
-        bar: deserializeEnum<BarOptions>(data['bar']),
+        drink: deserializeEnum<BarOptions>(data['drink']),
         parking: data['parking'] as String?,
         venueType: deserializeEnum<VenueType>(data['venueType']),
         eventType: deserializeEnum<EventType>(data['eventType']),
@@ -182,7 +182,7 @@ class EventTypeStruct extends FFFirebaseStruct {
         'beaconUUID': _beaconUUID,
         'nfcSupported': _nfcSupported,
         'food': _food?.toString(),
-        'bar': _bar?.toString(),
+        'drink': _drink?.toString(),
         'parking': _parking,
         'venueType': _venueType?.toString(),
         'eventType': _eventType?.toString(),
@@ -239,8 +239,8 @@ class EventTypeStruct extends FFFirebaseStruct {
           _food,
           ParamType.Enum,
         ),
-        'bar': serializeParam(
-          _bar,
+        'drink': serializeParam(
+          _drink,
           ParamType.Enum,
         ),
         'parking': serializeParam(
@@ -320,8 +320,8 @@ class EventTypeStruct extends FFFirebaseStruct {
           ParamType.Enum,
           false,
         ),
-        bar: deserializeParam<BarOptions>(
-          data['bar'],
+        drink: deserializeParam<BarOptions>(
+          data['drink'],
           ParamType.Enum,
           false,
         ),
@@ -361,7 +361,7 @@ class EventTypeStruct extends FFFirebaseStruct {
         beaconUUID == other.beaconUUID &&
         nfcSupported == other.nfcSupported &&
         food == other.food &&
-        bar == other.bar &&
+        drink == other.drink &&
         parking == other.parking &&
         venueType == other.venueType &&
         eventType == other.eventType;
@@ -381,7 +381,7 @@ class EventTypeStruct extends FFFirebaseStruct {
         beaconUUID,
         nfcSupported,
         food,
-        bar,
+        drink,
         parking,
         venueType,
         eventType
@@ -400,7 +400,7 @@ EventTypeStruct createEventTypeStruct({
   String? beaconUUID,
   bool? nfcSupported,
   FoodOptions? food,
-  BarOptions? bar,
+  BarOptions? drink,
   String? parking,
   VenueType? venueType,
   EventType? eventType,
@@ -421,7 +421,7 @@ EventTypeStruct createEventTypeStruct({
       beaconUUID: beaconUUID,
       nfcSupported: nfcSupported,
       food: food,
-      bar: bar,
+      drink: drink,
       parking: parking,
       venueType: venueType,
       eventType: eventType,

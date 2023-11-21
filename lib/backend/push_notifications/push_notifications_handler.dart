@@ -128,6 +128,10 @@ final parametersBuilderMap =
         },
       ),
   'PolygonIdPage': ParameterData.none(),
+  'CreateEvent': ParameterData.none(),
+  'AuthPage': ParameterData.none(),
+  'SettingsPage': ParameterData.none(),
+  'ProfilePage': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {
