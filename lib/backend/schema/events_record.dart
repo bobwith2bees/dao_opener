@@ -77,11 +77,6 @@ class EventsRecord extends FirestoreRecord {
   FoodOptions? get food => _food;
   bool hasFood() => _food != null;
 
-  // "bar" field.
-  BarOptions? _bar;
-  BarOptions? get bar => _bar;
-  bool hasBar() => _bar != null;
-
   // "venueType" field.
   VenueType? _venueType;
   VenueType? get venueType => _venueType;
@@ -96,6 +91,11 @@ class EventsRecord extends FirestoreRecord {
   String? _parking;
   String get parking => _parking ?? '';
   bool hasParking() => _parking != null;
+
+  // "drink" field.
+  BarOptions? _drink;
+  BarOptions? get drink => _drink;
+  bool hasDrink() => _drink != null;
 
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
@@ -113,10 +113,10 @@ class EventsRecord extends FirestoreRecord {
     _beaconUUID = snapshotData['beaconUUID'] as String?;
     _nfcSupported = snapshotData['nfcSupported'] as bool?;
     _food = deserializeEnum<FoodOptions>(snapshotData['food']);
-    _bar = deserializeEnum<BarOptions>(snapshotData['bar']);
     _venueType = deserializeEnum<VenueType>(snapshotData['venueType']);
     _eventType = deserializeEnum<EventType>(snapshotData['eventType']);
     _parking = snapshotData['parking'] as String?;
+    _drink = deserializeEnum<BarOptions>(snapshotData['drink']);
   }
 
   static CollectionReference get collection =>
@@ -164,10 +164,10 @@ Map<String, dynamic> createEventsRecordData({
   String? beaconUUID,
   bool? nfcSupported,
   FoodOptions? food,
-  BarOptions? bar,
   VenueType? venueType,
   EventType? eventType,
   String? parking,
+  BarOptions? drink,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -182,10 +182,10 @@ Map<String, dynamic> createEventsRecordData({
       'beaconUUID': beaconUUID,
       'nfcSupported': nfcSupported,
       'food': food,
-      'bar': bar,
       'venueType': venueType,
       'eventType': eventType,
       'parking': parking,
+      'drink': drink,
     }.withoutNulls,
   );
 
@@ -210,10 +210,10 @@ class EventsRecordDocumentEquality implements Equality<EventsRecord> {
         e1?.beaconUUID == e2?.beaconUUID &&
         e1?.nfcSupported == e2?.nfcSupported &&
         e1?.food == e2?.food &&
-        e1?.bar == e2?.bar &&
         e1?.venueType == e2?.venueType &&
         e1?.eventType == e2?.eventType &&
-        e1?.parking == e2?.parking;
+        e1?.parking == e2?.parking &&
+        e1?.drink == e2?.drink;
   }
 
   @override
@@ -230,10 +230,10 @@ class EventsRecordDocumentEquality implements Equality<EventsRecord> {
         e?.beaconUUID,
         e?.nfcSupported,
         e?.food,
-        e?.bar,
         e?.venueType,
         e?.eventType,
-        e?.parking
+        e?.parking,
+        e?.drink
       ]);
 
   @override

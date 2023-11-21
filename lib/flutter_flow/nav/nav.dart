@@ -121,6 +121,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PolygonIdPage',
               path: 'polygonIdPage',
               builder: (context, params) => PolygonIdPageWidget(),
+            ),
+            FFRoute(
+              name: 'CreateEvent',
+              path: 'createEvent',
+              builder: (context, params) => CreateEventWidget(),
+            ),
+            FFRoute(
+              name: 'AuthPage',
+              path: 'authPage',
+              builder: (context, params) => AuthPageWidget(),
+            ),
+            FFRoute(
+              name: 'SettingsPage',
+              path: 'settingsPage',
+              builder: (context, params) => SettingsPageWidget(),
+            ),
+            FFRoute(
+              name: 'ProfilePage',
+              path: 'profilePage',
+              builder: (context, params) => ProfilePageWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
