@@ -7,6 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -120,6 +121,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PolygonIdPage',
               path: 'polygonIdPage',
               builder: (context, params) => PolygonIdPageWidget(),
+            ),
+            FFRoute(
+              name: 'CreateEvent',
+              path: 'createEvent',
+              builder: (context, params) => CreateEventWidget(),
+            ),
+            FFRoute(
+              name: 'AuthPage',
+              path: 'authPage',
+              builder: (context, params) => AuthPageWidget(),
+            ),
+            FFRoute(
+              name: 'SettingsPage',
+              path: 'settingsPage',
+              builder: (context, params) => SettingsPageWidget(),
+            ),
+            FFRoute(
+              name: 'ProfilePage',
+              path: 'profilePage',
+              builder: (context, params) => ProfilePageWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -305,7 +326,7 @@ class FFRoute {
                   child: SizedBox(
                     width: 50.0,
                     height: 50.0,
-                    child: SpinKitThreeBounce(
+                    child: SpinKitPulse(
                       color: FlutterFlowTheme.of(context).primary,
                       size: 50.0,
                     ),
