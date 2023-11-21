@@ -1,0 +1,150 @@
+{
+  "project_info": {
+    "project_number": "80251260068",
+    "project_id": "fifthpint-common-dev",
+    "storage_bucket": "fifthpint-common-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80251260068:android:c7875402722bc0e636aa31",
+        "android_client_info": {
+          "package_name": "com.fifithpint.daoopener"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80251260068-d3mkl9nocfsr87k8sp5tugk54cgdoae9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fifithpint.daoopener",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "80251260068-bt4bjdsef8stpja91idbbdljkg8qhpjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKeiHLu8EDGcVskHif-30WHtNxj7xzdcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80251260068-3qubb9qu8171friblsoocaku82k5c82m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "80251260068-5ndq6kun3m43i50mnk75f7c6m6qact5n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fifithpint.daoopener"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80251260068:android:b70f5ffea6b96ef936aa31",
+        "android_client_info": {
+          "package_name": "com.fifthpint.common.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80251260068-h9q2sa8ue9ujrggdq1ap3i46joako5rg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fifthpint.common.dev",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "80251260068-bt4bjdsef8stpja91idbbdljkg8qhpjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKeiHLu8EDGcVskHif-30WHtNxj7xzdcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80251260068-3qubb9qu8171friblsoocaku82k5c82m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "80251260068-5ndq6kun3m43i50mnk75f7c6m6qact5n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fifithpint.daoopener"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80251260068:android:7f41be64cc70788136aa31",
+        "android_client_info": {
+          "package_name": "com.fifthpint.fp_common"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80251260068-256fdbbvit7lh3jh4e3n2ia8qgk80rv6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fifthpint.fp_common",
+            "certificate_hash": "6b56cff6325adba43b6af76080f65e51783cfca4"
+          }
+        },
+        {
+          "client_id": "80251260068-vbmkma8p8o2kmjjhmbkueeig2mehuis7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fifthpint.fp_common",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "80251260068-bt4bjdsef8stpja91idbbdljkg8qhpjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKeiHLu8EDGcVskHif-30WHtNxj7xzdcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80251260068-3qubb9qu8171friblsoocaku82k5c82m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "80251260068-5ndq6kun3m43i50mnk75f7c6m6qact5n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fifithpint.daoopener"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
