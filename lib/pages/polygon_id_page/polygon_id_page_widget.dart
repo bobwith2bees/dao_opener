@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -309,8 +310,35 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    _model.requestCredentialResult =
+                        await FlutterBarcodeScanner.scanBarcode(
+                      '#C62828', // scanning line color
+                      'Cancel', // cancel button text
+                      true, // whether to show the flash icon
+                      ScanMode.QR,
+                    );
+
+                    await actions.requestCredential(
+                      _model.requestCredentialResult!,
+                      null,
+                      null,
+                      null,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          _model.requestCredentialResult!,
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                          ),
+                        ),
+                        duration: Duration(milliseconds: 4000),
+                        backgroundColor: FlutterFlowTheme.of(context).secondary,
+                      ),
+                    );
+
+                    setState(() {});
                   },
                   text: 'Request Credential',
                   options: FFButtonOptions(

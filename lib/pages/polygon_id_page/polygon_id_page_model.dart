@@ -6,6 +6,7 @@ import '/custom_code/actions/index.dart' as actions;
 import 'polygon_id_page_widget.dart' show PolygonIdPageWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +20,7 @@ class PolygonIdPageModel extends FlutterFlowModel<PolygonIdPageWidget> {
   dynamic? addIdentityJson;
   // Stores action output result for [Custom Action - checkIdentity] action in Button widget.
   bool? identityResult;
+  var requestCredentialResult = '';
 
   /// Initialization and disposal methods.
 
