@@ -14,3 +14,4 @@ export 'polygon_sdk_get_env.dart' show polygonSdkGetEnv;
 export 'add_identity.dart' show addIdentity;
 export 'get_did_identifier.dart' show getDidIdentifier;
 export 'check_identity.dart' show checkIdentity;
+export 'request_credential.dart' show requestCredential;

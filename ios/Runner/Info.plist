@@ -53,11 +53,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
+	<key>NSCameraUsageDescription</key>
+    <string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
     <string>We leverage Bluetooth to identify nearby ticket terminals.</string>
-	<key>NSCameraUsageDescription</key>
-    <string>We use the camera to scan QR codes to pass information between devices.</string>
 	<key>PermissionGroupNotification</key>
     <string>We will notify you if any of your credentials or tickets have updated.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -97,9 +96,5 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>
