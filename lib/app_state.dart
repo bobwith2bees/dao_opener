@@ -76,6 +76,41 @@ class FFAppState extends ChangeNotifier {
   set identityNetwork(String _value) {
     _identityNetwork = _value;
   }
+
+  bool _isCircuitDownloading = true;
+  bool get isCircuitDownloading => _isCircuitDownloading;
+  set isCircuitDownloading(bool _value) {
+    _isCircuitDownloading = _value;
+  }
+
+  List<ClaimModelStruct> _claims = [];
+  List<ClaimModelStruct> get claims => _claims;
+  set claims(List<ClaimModelStruct> _value) {
+    _claims = _value;
+  }
+
+  void addToClaims(ClaimModelStruct _value) {
+    _claims.add(_value);
+  }
+
+  void removeFromClaims(ClaimModelStruct _value) {
+    _claims.remove(_value);
+  }
+
+  void removeAtIndexFromClaims(int _index) {
+    _claims.removeAt(_index);
+  }
+
+  void updateClaimsAtIndex(
+    int _index,
+    ClaimModelStruct Function(ClaimModelStruct) updateFn,
+  ) {
+    _claims[_index] = updateFn(_claims[_index]);
+  }
+
+  void insertAtIndexInClaims(int _index, ClaimModelStruct _value) {
+    _claims.insert(_index, _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
