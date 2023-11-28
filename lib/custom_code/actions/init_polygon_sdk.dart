@@ -1,8 +1,4 @@
 // Automatic FlutterFlow imports
-import 'package:polygonid_flutter_sdk/credential/domain/entities/claim_entity.dart';
-import 'package:polygonid_flutter_sdk/identity/domain/entities/identity_entity.dart';
-import 'package:polygonid_flutter_sdk/proof/domain/entities/download_info_entity.dart';
-
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
@@ -56,43 +52,14 @@ Future initPolygonSdk() async {
   EnvEntity envEntity = await PolygonIdSdk.I.getEnv();
   // print('initPolygonSdk - $envEntity');
 
-  // Devnote - Modified this private_identity_entity.dart
-  //  factory PrivateIdentityEntity.fromJson(Map<String, dynamic> json) {
-  //     return PrivateIdentityEntity(
-  //       did: json['did'],
-  //       publicKey: List<String>.from(json['publicKey']),
-  //       profiles: (json['profiles'] as Map<String, dynamic>)  // this cast change
-  //           .map((key, value) => MapEntry(BigInt.parse(key), value)),
-  //       privateKey: json['privateKey'],
-  //     );
-  //   }
+  print('initPolygonSdk - create identity');
+  PrivateIdentityEntity identity = await sdk.identity.addIdentity();
+  // Save identity to AppState
+  FFAppState().update(() {
+    FFAppState().privateIdentityEntity = identity.toJson();
+  });
 
-  print('initPolygonSdk - getIdentities');
-  List<IdentityEntity> identities = await sdk.identity.getIdentities();
-  if (identities.isNotEmpty) {
-    for (IdentityEntity identity in identities) {
-      print('initPolygonSdk - getIdentities - did: ${identity.did}, profiles ${identity.profiles}');
-    }
-  } else {
-    print('initPolygonSdk - getIdentities - No existing identities.');
-  }
-
-  // PrivateIdentities have the private key
-  PrivateIdentityEntity privateIdentity;
-  try {
-    print('initPolygonSdk - attempt to restore existing privateIdentity from secure storage.');
-    privateIdentity = PrivateIdentityEntity.fromJson(FFAppState().privateIdentityEntity);
-    print('initPolygonSdk - privateIdentity restored for did ${privateIdentity.did}');
-  } on Exception catch (e) {
-    print('initPolygonSdk -  error restoring privateIdentity: $e.  *** Creating new privateIdentity ***');
-    privateIdentity = await sdk.identity.addIdentity();
-    // Save identity to AppState
-    FFAppState().update(() {
-      FFAppState().privateIdentityEntity = privateIdentity.toJson();
-    });
-  }
-
-  String privateKey = privateIdentity.privateKey;
+  String privateKey = identity.privateKey;
   String identifier = await sdk.identity.getDidIdentifier(
     privateKey: privateKey,
     blockchain: env.blockchain,
@@ -114,31 +81,6 @@ Future initPolygonSdk() async {
   });
 
   print('initPolygonSdk - privateKey: $privateKey, genesisDid $genesisDid');
-
-  // What Claims do we have?
-  List<ClaimEntity> claimList = await sdk.credential.getClaims(
-    genesisDid: privateIdentity.did,
-    privateKey: privateIdentity.privateKey,
-  );
-
-  if (claimList.isNotEmpty) {
-    for (ClaimEntity claimEntity in claimList) {
-      print('initPolygonSdk - claim: $claimEntity');
-    }
-  } else {
-    print('initPolygonSdk - no claims found');
-  }
-
-  Map<BigInt, String> profiles = await sdk.identity.getProfiles(genesisDid: genesisDid, privateKey: privateKey);
-  profiles.forEach((k, v) => print("Nonce : $k, privateDid : $v"));
-
-  print('initPolygonSdk - start circuits download');
-  Stream<DownloadInfo> stream = PolygonIdSdk.I.proof.initCircuitsDownloadAndGetInfoStream;
-
-  StreamSubscription? _subscription;
-  _subscription = stream.listen((downloadInfo) {
-    print('circuits download event - $downloadInfo');
-  });
 
   // Iden3MessageEntity iden3messageEntity =
   //     await PolygonIdSdk.I.iden3comm.getIden3Message(message: "This is the message");
