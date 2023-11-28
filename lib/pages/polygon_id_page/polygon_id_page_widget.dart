@@ -257,7 +257,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                   onPressed: () {
                     print('Button pressed ...');
                   },
-                  text: 'Backup Idendity',
+                  text: 'Backup Identity\n',
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 40.0,
@@ -285,7 +285,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                   onPressed: () {
                     print('Button pressed ...');
                   },
-                  text: 'Restore Idendity',
+                  text: 'Restore Identity',
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 40.0,
@@ -307,61 +307,121 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    _model.requestCredentialResult =
-                        await FlutterBarcodeScanner.scanBarcode(
-                      '#C62828', // scanning line color
-                      'Cancel', // cancel button text
-                      true, // whether to show the flash icon
-                      ScanMode.QR,
-                    );
+              if (!FFAppState().isCircuitDownloading)
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      _model.requestCredentialResult =
+                          await FlutterBarcodeScanner.scanBarcode(
+                        '#C62828', // scanning line color
+                        'Cancel', // cancel button text
+                        true, // whether to show the flash icon
+                        ScanMode.QR,
+                      );
 
-                    await actions.requestCredential(
-                      _model.requestCredentialResult!,
-                      null,
-                      null,
-                      null,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          _model.requestCredentialResult!,
-                          style: TextStyle(
-                            color: FlutterFlowTheme.of(context).primaryText,
+                      await actions.requestCredential(
+                        _model.requestCredentialResult!,
+                        null,
+                        null,
+                        null,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            _model.requestCredentialResult!,
+                            style: TextStyle(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                            ),
                           ),
+                          duration: Duration(milliseconds: 4000),
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondary,
                         ),
-                        duration: Duration(milliseconds: 4000),
-                        backgroundColor: FlutterFlowTheme.of(context).secondary,
-                      ),
-                    );
+                      );
 
-                    setState(() {});
-                  },
-                  text: 'Request Credential',
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Inter',
-                          color: Colors.white,
-                        ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
+                      setState(() {});
+                    },
+                    text: 'Request Credential',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter',
+                                color: Colors.white,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
-                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-              ),
+              if (!FFAppState().isCircuitDownloading)
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      _model.authenticateRequest =
+                          await FlutterBarcodeScanner.scanBarcode(
+                        '#C62828', // scanning line color
+                        'Cancel', // cancel button text
+                        true, // whether to show the flash icon
+                        ScanMode.QR,
+                      );
+
+                      _model.authenticateResult =
+                          await actions.authenticateCredential(
+                        _model.authenticateRequest!,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            _model.authenticateResult!,
+                            style: TextStyle(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          duration: Duration(milliseconds: 4000),
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondary,
+                        ),
+                      );
+
+                      setState(() {});
+                    },
+                    text: 'Authenticate',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter',
+                                color: Colors.white,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

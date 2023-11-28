@@ -21,6 +21,9 @@ class PolygonIdPageModel extends FlutterFlowModel<PolygonIdPageWidget> {
   // Stores action output result for [Custom Action - checkIdentity] action in Button widget.
   bool? identityResult;
   var requestCredentialResult = '';
+  var authenticateRequest = '';
+  // Stores action output result for [Custom Action - authenticateCredential] action in Button widget.
+  String? authenticateResult;
 
   /// Initialization and disposal methods.
 
