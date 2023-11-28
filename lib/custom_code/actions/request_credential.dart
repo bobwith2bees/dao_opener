@@ -1,4 +1,8 @@
 // Automatic FlutterFlow imports
+import 'package:polygonid_flutter_sdk/credential/domain/entities/claim_entity.dart';
+import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
+import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
+
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
@@ -36,6 +40,7 @@ Future<bool> requestCredential(
       message = response.body;
       print('requestCredential - message: $message');
     } else {
+      
       print(
           'requestCredential - unable to load $uriString, response: ${response.statusCode} ${response.reasonPhrase}');
     }
@@ -43,6 +48,7 @@ Future<bool> requestCredential(
 
   Iden3MessageEntity iden3messageEntity;
   try {
+
     iden3messageEntity =
         await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
   } on Exception catch (e) {
@@ -56,8 +62,8 @@ Future<bool> requestCredential(
   nonce ??= '';
 
   try {
-    List<ClaimEntity> claims =
-        await PolygonIdSdk.I.iden3comm.fetchAndSaveClaims(
+
+    List<ClaimEntity> claims = await PolygonIdSdk.I.iden3comm.fetchAndSaveClaims(
       message: iden3messageEntity,
       genesisDid: genesisDid,
       profileNonce: BigInt.tryParse(nonce),
