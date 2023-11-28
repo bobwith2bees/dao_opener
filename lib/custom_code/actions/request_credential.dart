@@ -13,6 +13,9 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:polygonid_flutter_sdk/credential/domain/entities/claim_entity.dart';
+import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
+import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
 import 'package:http/http.dart' as http;
 
 String testCredential =
@@ -20,7 +23,7 @@ String testCredential =
 String testCredentialJson =
     '{"message":"Invalid format for parameter id: error unmarshaling \'db0c71f3-608b-4cde-b72b-bd3efb212fb4\"\' text as *uuid.UUID: invalid UUID length: 37"}';
 
-Future requestCredential(
+Future<bool> requestCredential(
   String message,
   String? genesisDid,
   String? privateKey,
@@ -37,13 +40,17 @@ Future requestCredential(
       message = response.body;
       print('requestCredential - message: $message');
     } else {
-      print('requestCredential - unable to load $uriString, response: ${response.statusCode} ${response.reasonPhrase}');
+      
+      print(
+          'requestCredential - unable to load $uriString, response: ${response.statusCode} ${response.reasonPhrase}');
     }
   }
 
   Iden3MessageEntity iden3messageEntity;
   try {
-    iden3messageEntity = await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
+
+    iden3messageEntity =
+        await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
   } on Exception catch (e) {
     print('requestCredential - Error parsing iden3 message "$message": $e');
     rethrow;
@@ -55,6 +62,7 @@ Future requestCredential(
   nonce ??= '';
 
   try {
+
     List<ClaimEntity> claims = await PolygonIdSdk.I.iden3comm.fetchAndSaveClaims(
       message: iden3messageEntity,
       genesisDid: genesisDid,
