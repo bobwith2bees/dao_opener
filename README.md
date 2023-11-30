@@ -27,7 +27,7 @@ JSON schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
 * * MembershipCredential -> Preview import -> Import (Duplicate error ok)
 
 ## Build Credential
-* Navigate to https://issuer-ui.polygonid.me/schemas
+* Navigate to https://ui.34.117.139.46.nip.io/schemas  (hosted https://issuer-ui.polygonid.me/schemas )
 * Select DAOMembership
 * * Spot check hash ed3d872056a5dbb516623dce8ddd26d9
 * Issue Credential
@@ -57,7 +57,7 @@ JSON schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
 * Tap Request credential button
 
 # Verify Credential
-* Navigate to https://verifier-demo.polygonid.me/   
+* Navigate to https://verifier.polygonid.me/   (broken: https://verifier-demo.polygonid.me/  ) 
 * Select Custom from the dropdown box
 * Click Sign In button
 * Circuit ID - Credential Atomic Signature (Default)
@@ -65,8 +65,8 @@ JSON schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
 * Type: MembershipCredential
 * Issuer: * 
 * Field: PartOfTheDAO
-* Operator: EQ
-* Value: 1
+* Operator: GT
+* Value: 0
 * To: did:polygonid:polygon:mumbai:2qGZqUP2LtnCubFS8MCF125qf67Kd8gkyWa4nU2qqu
 
 
@@ -121,3 +121,8 @@ I/flutter (27812):   },
 I/flutter (27812):   "from": "did:polygonid:polygon:mumbai:2qLhNLVmoQS7pQtpMeKHDqkTcENBZUj1nkZiRNPGgV",
 I/flutter (27812):   "to": "did:polygonid:polygon:mumbai:2qGZqUP2LtnCubFS8MCF125qf67Kd8gkyWa4nU2qqu"
 I/flutter (27812): }
+
+
+Other Notes:
+- Really need to have approved sets of tools that are known compatible.  Solution kits.   GCP lagging a month is a dealbreaker when things are moving fast.
+- URL Schema vs LD Schema consistency across apps with error checking is a must.
