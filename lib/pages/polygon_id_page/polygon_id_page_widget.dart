@@ -113,12 +113,12 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                                 alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 0.0, 0.0),
+                                      8.0, 8.0, 8.0, 0.0),
                                   child: SelectionArea(
                                       child: Text(
                                     FFAppState().identityGenesisId,
                                     textAlign: TextAlign.start,
-                                    maxLines: 2,
+                                    maxLines: 3,
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                   )),
