@@ -9,8 +9,59 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:http/http.dart' as http;
+import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
+import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
+import 'dart:convert';
+
 Future<String> authenticateCredential(String message) async {
   // Add your function code here!
 
-  return "Placeholder";
+  print('authenticateCredential -');
+
+  // Check for URI
+  if (message.startsWith('iden3comm://?request_uri=')) {
+    String uriString = message.substring(25);
+    final response = await http.get(Uri.parse(uriString));
+    print('authenticateCredential - load from request_uri: $uriString');
+    if (response.statusCode == 200) {
+      message = response.body;
+      //print('authenticateCredential - message: $message');
+    } else {
+      print(
+          'authenticateCredential - unable to load $uriString, response: ${response.statusCode} ${response.reasonPhrase}');
+    }
+  }
+
+  try {
+    var messageDecoded = jsonDecode(message);
+    JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    String prettyprint = encoder.convert(messageDecoded);
+    debugPrint(prettyprint);
+  } on Exception catch (e) {
+    print('authenticateCredential -message: $message');
+  }
+
+  Iden3MessageEntity iden3messageEntity;
+  try {
+    iden3messageEntity =
+        await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
+  } on Exception catch (e) {
+    print('authenticateCredential - error decoding message $e');
+    return "Error decoding iden3 message: $message";
+  }
+
+  try {
+    await PolygonIdSdk.I.iden3comm.authenticate(
+      message: iden3messageEntity,
+      genesisDid: FFAppState().identityGenesisId,
+      privateKey: FFAppState().idendityPrivateKey,
+      profileNonce: null,
+    );
+  } on Exception catch (e) {
+    print('authenticateCredential - error authenticating message $e');
+    return "Error calling authenticate $e";
+  }
+
+  return "Done!";
 }
