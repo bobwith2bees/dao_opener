@@ -1,0 +1,295 @@
+[debug] [2023-11-30T21:54:50.352Z] ----------------------------------------------------------------------
+[debug] [2023-11-30T21:54:50.354Z] Command:       /usr/local/Cellar/node@18/18.18.2/bin/node /Users/bobb/src/dao_opener/functions/node_modules/.bin/firebase emulators:start --only functions
+[debug] [2023-11-30T21:54:50.354Z] CLI Version:   12.8.1
+[debug] [2023-11-30T21:54:50.355Z] Platform:      darwin
+[debug] [2023-11-30T21:54:50.355Z] Node Version:  v18.18.2
+[debug] [2023-11-30T21:54:50.357Z] Time:          Thu Nov 30 2023 15:54:50 GMT-0600 (Central Standard Time)
+[debug] [2023-11-30T21:54:50.357Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-11-30T21:54:50.468Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-30T21:54:50.469Z] > authorizing via signed-in user (bob@graflr.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2023-11-30T21:54:51.427Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-11-30T21:54:51.429Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-11-30T21:54:51.434Z] [hub] writing locator at /var/folders/n2/jsct0k_j3j7dtb6snx2sxnjr0000gn/T/hub-fifthpint-common-dev.json
+[debug] [2023-11-30T21:54:52.088Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-11-30T21:54:52.090Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-11-30T21:54:52.091Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
+[debug] [2023-11-30T21:54:52.095Z] defaultcredentials: writing to file /Users/bobb/.config/firebase/bob_graflr_com_application_default_credentials.json
+[debug] [2023-11-30T21:54:52.105Z] Setting GAC to /Users/bobb/.config/firebase/bob_graflr_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/bobb/.config/firebase/bob_graflr_com_application_default_credentials.json"}}
+[debug] [2023-11-30T21:54:52.108Z] > refreshing access token with scopes: []
+[debug] [2023-11-30T21:54:52.110Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-11-30T21:54:52.111Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-11-30T21:54:52.345Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-11-30T21:54:52.348Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-11-30T21:54:52.363Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fifthpint-common-dev/adminSdkConfig [none]
+[debug] [2023-11-30T21:54:52.852Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fifthpint-common-dev/adminSdkConfig 200
+[debug] [2023-11-30T21:54:52.854Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fifthpint-common-dev/adminSdkConfig {"projectId":"fifthpint-common-dev","storageBucket":"fifthpint-common-dev.appspot.com","locationId":"us-central"}
+[debug] [2023-11-30T21:54:52.884Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-11-30T21:54:52.886Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-11-30T21:54:52.886Z] Starting Emulator UI with command {"binary":"node","args":["/Users/bobb/.cache/firebase/emulators/ui-v1.11.7/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/bobb/.cache/firebase/emulators/ui-v1.11.7/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-11-30T21:54:53.024Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-11-30T21:54:53.024Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "/Users/bobb/src/dao_opener/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/bobb/src/dao_opener/functions\" for Cloud Functions..."}}
+[debug] [2023-11-30T21:54:53.159Z] Validating nodejs source
+[debug] [2023-11-30T21:54:53.940Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "npm run build && npx firebase emulators:start --only functions",
+    "shell": "npm run build && npx firebase functions:shell",
+    "deploy": "npx firebase deploy --only functions",
+    "logs": "npx firebase functions:log",
+    "service:link-pg": "cd ../../.. && npm run build && npm link",
+    "predev:install": "npm run clear:deps",
+    "dev:install": "npm run service:link-pg && npm link passkit-generator",
+    "clear:deps": "rm -rf node_modules",
+    "build": "rm -rf lib && npx tsc"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@google-cloud/secret-manager": "^5.0.1",
+    "@iden3/js-iden3-auth": "^1.0.3",
+    "firebase-admin": "^11.10.1",
+    "firebase-functions": "^4.4.1",
+    "tslib": "^2.6.1",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "passkit-generator": "latest"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.3",
+    "firebase-tools": "^12.4.6"
+  },
+  "private": true
+}
+[debug] [2023-11-30T21:54:53.941Z] Building nodejs source
+[debug] [2023-11-30T21:54:53.941Z] Failed to find version of module node: reached end of search path /Users/bobb/src/dao_opener/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2023-11-30T21:54:53.946Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-11-30T21:54:53.957Z] Found firebase-functions binary at '/Users/bobb/src/dao_opener/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8832
+
+[error] (node:16806) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[error] (node:16806) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time
+
+[debug] [2023-11-30T21:54:54.632Z] Got response from /__/functions.yaml {"endpoints":{"pass":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"pass"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] ✔  functions: Loaded functions definitions from source: pass. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: pass."}}
+[info] ✔  functions[us-central1-pass]: http function initialized (http://127.0.0.1:5001/fifthpint-common-dev/us-central1/pass). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/fifthpint-common-dev/us-central1/pass)."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-11-30T21:55:00.102Z] [work-queue] {"queuedWork":["/fifthpint-common-dev/us-central1/pass-2023-11-30T21:55:00.102Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-11-30T21:55:00.102Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/fifthpint-common-dev/us-central1/pass-2023-11-30T21:55:00.102Z"],"workRunningCount":1}
+[debug] [2023-11-30T21:55:00.102Z] Accepted request POST /fifthpint-common-dev/us-central1/pass --> us-central1-pass
+[debug] [2023-11-30T21:55:00.103Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-11-30T21:55:00.103Z] [functions] Got req.url=/fifthpint-common-dev/us-central1/pass, mapping to path=/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/fifthpint-common-dev/us-central1/pass, mapping to path=/"}}
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2023-11-30T21:55:00.110Z] [worker-pool] addWorker(us-central1-pass) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-pass)"}}
+[debug] [2023-11-30T21:55:00.111Z] [worker-pool] Adding worker with key us-central1-pass, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-pass, total=1"}}
+[debug] [2023-11-30T21:55:00.813Z] [runtime-status] [16820] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-11-30T21:55:00.814Z] [runtime-status] [16820] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:55:00.814Z] [runtime-status] [16820] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2023-11-30T21:55:00.815Z] [runtime-status] [16820] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:55:00.887Z] [runtime-status] [16820] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Checked functions.config() {\"config\":{}}"}}
+[debug] [2023-11-30T21:55:00.887Z] [runtime-status] [16820] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}}"}}
+[debug] [2023-11-30T21:55:00.887Z] [runtime-status] [16820] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:55:00.888Z] [runtime-status] [16820] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-11-30T21:55:00.890Z] [runtime-status] [16820] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:55:00.891Z] [runtime-status] [16820] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.11.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.11.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] >  (node:16820) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js. {"user":"(node:16820) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js.","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"\u001b[90m> \u001b[39m (node:16820) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js."}}
+[info] >  (Use `node --trace-warnings ...` to show where the warning was created) {"user":"(Use `node --trace-warnings ...` to show where the warning was created)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"\u001b[90m> \u001b[39m (Use `node --trace-warnings ...` to show where the warning was created)"}}
+[debug] [2023-11-30T21:55:01.097Z] [runtime-status] [16820] Functions runtime initialized. {"cwd":"/Users/bobb/src/dao_opener/functions","node_version":"18.18.2"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Functions runtime initialized. {\"cwd\":\"/Users/bobb/src/dao_opener/functions\",\"node_version\":\"18.18.2\"}"}}
+[debug] [2023-11-30T21:55:01.099Z] [runtime-status] [16820] Listening to port: /var/folders/n2/jsct0k_j3j7dtb6snx2sxnjr0000gn/T/fire_emu_52316ebac934f81d.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [16820] Listening to port: /var/folders/n2/jsct0k_j3j7dtb6snx2sxnjr0000gn/T/fire_emu_52316ebac934f81d.sock"}}
+[info] >  (node:16820) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time {"user":"(node:16820) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"\u001b[90m> \u001b[39m (node:16820) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time"}}
+[debug] [2023-11-30T21:55:01.141Z] [worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: IDLE"}}
+[debug] [2023-11-30T21:55:01.141Z] [worker-pool] submitRequest(triggerId=us-central1-pass) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-pass)"}}
+[info] i  functions: Beginning execution of "us-central1-pass" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Beginning execution of \"us-central1-pass\""}}
+[debug] [2023-11-30T21:55:01.141Z] [worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: BUSY"}}
+[warn] ⚠  Google API requested!
+   - URL: "https://oauth2.googleapis.com/token"
+   - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Google API requested!\n   - URL: \"https://oauth2.googleapis.com/token\"\n   - Be careful, this may be a production service."}}
+[warn] ⚠  Google API requested!
+   - URL: "https://storage.googleapis.com/storage/v1/b/fifthpint-common-dev.appspot.com/o/logos%2Flogo.png?alt=media"
+   - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Google API requested!\n   - URL: \"https://storage.googleapis.com/storage/v1/b/fifthpint-common-dev.appspot.com/o/logos%2Flogo.png?alt=media\"\n   - Be careful, this may be a production service."}}
+[debug] [2023-11-30T21:55:02.418Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-pass" in 1276.5970419999999ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finished \"us-central1-pass\" in 1276.5970419999999ms"}}
+[debug] [2023-11-30T21:55:02.419Z] [worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: IDLE"}}
+[debug] [2023-11-30T21:55:02.419Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2023-11-30T21:55:02.419Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2023-11-30T21:55:02.419Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2023-11-30T21:56:40.980Z] File /Users/bobb/src/dao_opener/functions/models/event.pass/background@2x.png changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/bobb/src/dao_opener/functions/models/event.pass/background@2x.png changed, reloading triggers"}}
+[debug] [2023-11-30T21:56:41.987Z] Validating nodejs source
+[debug] [2023-11-30T21:56:42.744Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "npm run build && npx firebase emulators:start --only functions",
+    "shell": "npm run build && npx firebase functions:shell",
+    "deploy": "npx firebase deploy --only functions",
+    "logs": "npx firebase functions:log",
+    "service:link-pg": "cd ../../.. && npm run build && npm link",
+    "predev:install": "npm run clear:deps",
+    "dev:install": "npm run service:link-pg && npm link passkit-generator",
+    "clear:deps": "rm -rf node_modules",
+    "build": "rm -rf lib && npx tsc"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@google-cloud/secret-manager": "^5.0.1",
+    "@iden3/js-iden3-auth": "^1.0.3",
+    "firebase-admin": "^11.10.1",
+    "firebase-functions": "^4.4.1",
+    "tslib": "^2.6.1",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "passkit-generator": "latest"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.3",
+    "firebase-tools": "^12.4.6"
+  },
+  "private": true
+}
+[debug] [2023-11-30T21:56:42.744Z] Building nodejs source
+[debug] [2023-11-30T21:56:42.745Z] Failed to find version of module node: reached end of search path /Users/bobb/src/dao_opener/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2023-11-30T21:56:42.751Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-11-30T21:56:42.755Z] Found firebase-functions binary at '/Users/bobb/src/dao_opener/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8575
+
+[error] (node:17059) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[error] (node:17059) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time
+
+[debug] [2023-11-30T21:56:43.379Z] Got response from /__/functions.yaml {"endpoints":{"pass":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"pass"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] ✔  functions: Loaded functions definitions from source: pass. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: pass."}}
+[debug] [2023-11-30T21:56:43.399Z] [worker-pool] Shutting down IDLE worker (us-central1-pass) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-pass)"}}
+[debug] [2023-11-30T21:56:43.399Z] [worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: FINISHING"}}
+[debug] [2023-11-30T21:56:43.406Z] [worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: exited"}}
+[debug] [2023-11-30T21:56:43.406Z] [worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-c1cb02c5-f8de-423d-b675-17bfc19d593e]: FINISHED"}}
+[debug] [2023-11-30T21:56:53.391Z] File /Users/bobb/src/dao_opener/functions/models/event.pass/background.png changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/bobb/src/dao_opener/functions/models/event.pass/background.png changed, reloading triggers"}}
+[debug] [2023-11-30T21:56:54.394Z] Validating nodejs source
+[debug] [2023-11-30T21:56:55.436Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "npm run build && npx firebase emulators:start --only functions",
+    "shell": "npm run build && npx firebase functions:shell",
+    "deploy": "npx firebase deploy --only functions",
+    "logs": "npx firebase functions:log",
+    "service:link-pg": "cd ../../.. && npm run build && npm link",
+    "predev:install": "npm run clear:deps",
+    "dev:install": "npm run service:link-pg && npm link passkit-generator",
+    "clear:deps": "rm -rf node_modules",
+    "build": "rm -rf lib && npx tsc"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@google-cloud/secret-manager": "^5.0.1",
+    "@iden3/js-iden3-auth": "^1.0.3",
+    "firebase-admin": "^11.10.1",
+    "firebase-functions": "^4.4.1",
+    "tslib": "^2.6.1",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "passkit-generator": "latest"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.3",
+    "firebase-tools": "^12.4.6"
+  },
+  "private": true
+}
+[debug] [2023-11-30T21:56:55.436Z] Building nodejs source
+[debug] [2023-11-30T21:56:55.437Z] Failed to find version of module node: reached end of search path /Users/bobb/src/dao_opener/functions/node_modules
+[info] ✔  functions: Using node@18 from host. 
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2023-11-30T21:56:55.439Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-11-30T21:56:55.441Z] Found firebase-functions binary at '/Users/bobb/src/dao_opener/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8637
+
+[error] (node:17112) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[error] (node:17112) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time
+
+[debug] [2023-11-30T21:56:56.093Z] Got response from /__/functions.yaml {"endpoints":{"pass":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"pass"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] ✔  functions: Loaded functions definitions from source: pass. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: pass."}}
+[debug] [2023-11-30T21:56:58.708Z] [work-queue] {"queuedWork":["/fifthpint-common-dev/us-central1/pass-2023-11-30T21:56:58.708Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2023-11-30T21:56:58.709Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/fifthpint-common-dev/us-central1/pass-2023-11-30T21:56:58.708Z"],"workRunningCount":1}
+[debug] [2023-11-30T21:56:58.709Z] Accepted request POST /fifthpint-common-dev/us-central1/pass --> us-central1-pass
+[debug] [2023-11-30T21:56:58.713Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2023-11-30T21:56:58.714Z] [functions] Got req.url=/fifthpint-common-dev/us-central1/pass, mapping to path=/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/fifthpint-common-dev/us-central1/pass, mapping to path=/"}}
+[debug] [2023-11-30T21:56:58.715Z] [worker-pool] Cleaned up workers for us-central1-pass: 1 --> 0 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Cleaned up workers for us-central1-pass: 1 --> 0"}}
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2023-11-30T21:56:58.724Z] [worker-pool] addWorker(us-central1-pass) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-pass)"}}
+[debug] [2023-11-30T21:56:58.725Z] [worker-pool] Adding worker with key us-central1-pass, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-pass, total=1"}}
+[debug] [2023-11-30T21:56:59.422Z] [runtime-status] [17115] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-11-30T21:56:59.423Z] [runtime-status] [17115] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:56:59.423Z] [runtime-status] [17115] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2023-11-30T21:56:59.424Z] [runtime-status] [17115] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:56:59.499Z] [runtime-status] [17115] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Checked functions.config() {\"config\":{}}"}}
+[debug] [2023-11-30T21:56:59.499Z] [runtime-status] [17115] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}}"}}
+[debug] [2023-11-30T21:56:59.499Z] [runtime-status] [17115] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:56:59.500Z] [runtime-status] [17115] Resolved module firebase-admin {"declared":true,"installed":true,"version":"11.11.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"11.11.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2023-11-30T21:56:59.501Z] [runtime-status] [17115] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.5.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.5.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2023-11-30T21:56:59.501Z] [runtime-status] [17115] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"11.11.0","resolution":"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"11.11.0\",\"resolution\":\"/Users/bobb/src/dao_opener/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] >  (node:17115) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js. {"user":"(node:17115) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js.","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"\u001b[90m> \u001b[39m (node:17115) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js."}}
+[info] >  (Use `node --trace-warnings ...` to show where the warning was created) {"user":"(Use `node --trace-warnings ...` to show where the warning was created)","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"\u001b[90m> \u001b[39m (Use `node --trace-warnings ...` to show where the warning was created)"}}
+[debug] [2023-11-30T21:56:59.699Z] [runtime-status] [17115] Functions runtime initialized. {"cwd":"/Users/bobb/src/dao_opener/functions","node_version":"18.18.2"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Functions runtime initialized. {\"cwd\":\"/Users/bobb/src/dao_opener/functions\",\"node_version\":\"18.18.2\"}"}}
+[info] >  (node:17115) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time {"user":"(node:17115) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time","metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"\u001b[90m> \u001b[39m (node:17115) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time"}}
+[debug] [2023-11-30T21:56:59.700Z] [runtime-status] [17115] Listening to port: /var/folders/n2/jsct0k_j3j7dtb6snx2sxnjr0000gn/T/fire_emu_c07b7dfcc4f58a6a.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[runtime-status] [17115] Listening to port: /var/folders/n2/jsct0k_j3j7dtb6snx2sxnjr0000gn/T/fire_emu_c07b7dfcc4f58a6a.sock"}}
+[debug] [2023-11-30T21:56:59.749Z] [worker-us-central1-pass-d2691825-e118-483f-bf97-142e839ec2de]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-d2691825-e118-483f-bf97-142e839ec2de]: IDLE"}}
+[debug] [2023-11-30T21:56:59.749Z] [worker-pool] submitRequest(triggerId=us-central1-pass) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-pass)"}}
+[info] i  functions: Beginning execution of "us-central1-pass" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Beginning execution of \"us-central1-pass\""}}
+[debug] [2023-11-30T21:56:59.750Z] [worker-us-central1-pass-d2691825-e118-483f-bf97-142e839ec2de]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-d2691825-e118-483f-bf97-142e839ec2de]: BUSY"}}
+[warn] ⚠  Google API requested!
+   - URL: "https://oauth2.googleapis.com/token"
+   - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Google API requested!\n   - URL: \"https://oauth2.googleapis.com/token\"\n   - Be careful, this may be a production service."}}
+[warn] ⚠  Google API requested!
+   - URL: "https://storage.googleapis.com/storage/v1/b/fifthpint-common-dev.appspot.com/o/logos%2Flogo.png?alt=media"
+   - Be careful, this may be a production service. {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Google API requested!\n   - URL: \"https://storage.googleapis.com/storage/v1/b/fifthpint-common-dev.appspot.com/o/logos%2Flogo.png?alt=media\"\n   - Be careful, this may be a production service."}}
+[debug] [2023-11-30T21:57:00.455Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-pass" in 705.256667ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finished \"us-central1-pass\" in 705.256667ms"}}
+[debug] [2023-11-30T21:57:00.455Z] [worker-us-central1-pass-d2691825-e118-483f-bf97-142e839ec2de]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"[worker-us-central1-pass-d2691825-e118-483f-bf97-142e839ec2de]: IDLE"}}
+[debug] [2023-11-30T21:57:00.455Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2023-11-30T21:57:00.455Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-pass"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2023-11-30T21:57:00.455Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
