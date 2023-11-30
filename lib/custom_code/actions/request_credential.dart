@@ -19,6 +19,14 @@ String testCredential =
 String testCredentialJson =
     '{"message":"Invalid format for parameter id: error unmarshaling \'db0c71f3-608b-4cde-b72b-bd3efb212fb4\"\' text as *uuid.UUID: invalid UUID length: 37"}';
 
+// https://issuer-ui.polygonid.me/
+// did:polygonid:polygon:mumbai:2qGZqUP2LtnCubFS8MCF125qf67Kd8gkyWa4nU2qqu
+// DAO Membership Schema URL : ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
+// DAO Membership LD-Context : ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui
+// https://issuer-ui.polygonid.me/credentials/scan-link/42e42ce1-df19-4000-ba48-d32d19af1092
+// iden3comm://?request_uri=https://issuer-admin.polygonid.me/v1/qr-store?id=d75e2890-1390-4fe8-851e-8e5f1c725e64
+//
+
 Future<bool> requestCredential(
   String message,
   String? genesisDid,

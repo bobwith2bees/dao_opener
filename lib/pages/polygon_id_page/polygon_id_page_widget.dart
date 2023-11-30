@@ -140,6 +140,19 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                               ),
                             ),
                           ),
+                          if (FFAppState().isCircuitDownloading)
+                            Align(
+                              alignment: AlignmentDirectional(0.00, 0.00),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 8.0, 0.0, 0.0),
+                                child: Text(
+                                  'Circuits are still downloading.',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ],
@@ -321,7 +334,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                           ),
                       textAlign: TextAlign.start,
                       maxLines: null,
-                      minLines: 4,
+                      minLines: 5,
                       keyboardType: TextInputType.url,
                       validator:
                           _model.qrTextControllerValidator.asValidator(context),
