@@ -158,7 +158,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
                 padding: EdgeInsetsDirectional.fromSTEB(32.0, 32.0, 32.0, 32.0),
                 child: Container(
                   width: double.infinity,
-                  height: 230.0,
+                  height: 150.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
                     borderRadius: BorderRadius.circular(16.0),
@@ -177,7 +177,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget>
               Align(
                 alignment: AlignmentDirectional(0.00, -1.00),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 170.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 100.0, 8.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,

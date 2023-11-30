@@ -67,10 +67,15 @@ class QrcodeParserUtils {
   }
 }
 
+import 'package:http/http.dart' as http;
+import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
+import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
+import 'dart:convert';
+
 Future<String> authenticateCredential(String message) async {
   // Add your function code here!
 
-  print('authenticateCredential -');
+
   QrcodeParserUtils qrcodeParserUtils = QrcodeParserUtils(PolygonIdSdk.I);
 
   // // Check for URI
