@@ -139,6 +139,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'ProfilePage',
               path: 'profilePage',
               builder: (context, params) => ProfilePageWidget(),
+            ),
+            FFRoute(
+              name: 'EventDetails',
+              path: 'eventDetails',
+              builder: (context, params) => EventDetailsWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

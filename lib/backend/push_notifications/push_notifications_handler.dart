@@ -129,6 +129,7 @@ final parametersBuilderMap =
   'AuthPage': ParameterData.none(),
   'SettingsPage': ParameterData.none(),
   'ProfilePage': ParameterData.none(),
+  'EventDetails': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

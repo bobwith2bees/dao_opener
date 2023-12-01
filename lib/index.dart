@@ -9,3 +9,4 @@ export '/create_event/create_event_widget.dart' show CreateEventWidget;
 export '/pages/auth_page/auth_page_widget.dart' show AuthPageWidget;
 export '/pages/settings_page/settings_page_widget.dart' show SettingsPageWidget;
 export '/profile_page/profile_page_widget.dart' show ProfilePageWidget;
+export '/event_details/event_details_widget.dart' show EventDetailsWidget;
