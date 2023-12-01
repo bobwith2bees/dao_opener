@@ -1,5 +1,4 @@
 // Automatic FlutterFlow imports
-
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'dart:convert';
 import 'package:polygonid_flutter_sdk/credential/domain/entities/claim_entity.dart';
 import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
@@ -29,59 +27,6 @@ String testCredentialJson =
 // iden3comm://?request_uri=https://issuer-admin.polygonid.me/v1/qr-store?id=d75e2890-1390-4fe8-851e-8e5f1c725e64
 //
 
-class QrcodeParserUtils {
-  final PolygonIdSdk _polygonIdSdk;
-
-  QrcodeParserUtils(this._polygonIdSdk);
-
-  Future<Iden3MessageEntity> getIden3MessageFromQrCode(String message) async {
-    try {
-      String rawMessage = message;
-
-      // old server added quotes
-      if (message.startsWith('"') && message.endsWith('"')) {
-        print('QrcodeParserUtils - stripping extra quotes on $message');
-        message = message.substring(1, (message.length - 1));
-      }
-      if (message.startsWith("iden3comm://?i_m")) {
-        rawMessage = await _getMessageFromBase64(message);
-      }
-
-      if (message.startsWith("iden3comm://?request_uri")) {
-        rawMessage = await _getMessageFromRemote(message);
-      }
-
-      Iden3MessageEntity? _iden3Message = await _polygonIdSdk.iden3comm.getIden3Message(message: rawMessage);
-      return _iden3Message;
-    } catch (error) {
-      throw Exception("Error while processing the QR code");
-    }
-  }
-
-  Future<String> _getMessageFromRemote(String message) async {
-    try {
-      message = message.replaceAll("iden3comm://?request_uri=", "");
-      http.Response response = await http.get(Uri.parse(message));
-      if (response.statusCode != 200) {
-        throw Exception("Error while getting the message from the remote");
-      }
-      return response.body;
-    } catch (error) {
-      throw Exception("Error while getting the message from the remote");
-    }
-  }
-
-  Future<String> _getMessageFromBase64(String message) async {
-    try {
-      message = message.replaceAll("iden3comm://?i_m=", "");
-      String decodedMessage = String.fromCharCodes(base64.decode(message));
-      return decodedMessage;
-    } catch (error) {
-      throw Exception("Error while getting the message from the base64");
-    }
-  }
-}
-
 Future<bool> requestCredential(
   String message,
   String? genesisDid,
@@ -90,25 +35,24 @@ Future<bool> requestCredential(
 ) async {
   print('requestCredential - message $message');
 
-  QrcodeParserUtils qrcodeParserUtils = QrcodeParserUtils(PolygonIdSdk.I);
-
-  // // Check for URI
-  // if (message.startsWith('iden3comm://?request_uri=')) {
-  //   String uriString = message.substring(25);
-  //   final response = await http.get(Uri.parse(uriString));
-  //   print('requestCredential - load from request_uri: $uriString');
-  //   if (response.statusCode == 200) {
-  //     message = response.body;
-  //     print('requestCredential - message: $message');
-  //   } else {
-  //     print('requestCredential - unable to load $uriString, response: ${response.statusCode} ${response.reasonPhrase}');
-  //   }
-  // }
+  // Check for URI
+  if (message.startsWith('iden3comm://?request_uri=')) {
+    String uriString = message.substring(25);
+    final response = await http.get(Uri.parse(uriString));
+    print('requestCredential - load from request_uri: $uriString');
+    if (response.statusCode == 200) {
+      message = response.body;
+      print('requestCredential - message: $message');
+    } else {
+      print(
+          'requestCredential - unable to load $uriString, response: ${response.statusCode} ${response.reasonPhrase}');
+    }
+  }
 
   Iden3MessageEntity iden3messageEntity;
   try {
-    // iden3messageEntity = await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
-    iden3messageEntity = await qrcodeParserUtils.getIden3MessageFromQrCode(message);
+    iden3messageEntity =
+        await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
   } on Exception catch (e) {
     print('requestCredential - Error parsing iden3 message "$message": $e');
     rethrow;
@@ -120,7 +64,8 @@ Future<bool> requestCredential(
   nonce ??= '';
 
   try {
-    List<ClaimEntity> claims = await PolygonIdSdk.I.iden3comm.fetchAndSaveClaims(
+    List<ClaimEntity> claims =
+        await PolygonIdSdk.I.iden3comm.fetchAndSaveClaims(
       message: iden3messageEntity,
       genesisDid: genesisDid,
       profileNonce: BigInt.tryParse(nonce),
