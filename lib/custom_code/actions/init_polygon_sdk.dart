@@ -31,9 +31,8 @@ const ipfsApiKeySecret = String.fromEnvironment('IPFS_API_KEY_SECRET');
 PrivateIdentityEntity privateIdentityEntityFromJson(Map<String, dynamic> json) {
   return PrivateIdentityEntity(
     did: json['did'],
-    publicKey: List<String>.from(json['publicKey']),
-    profiles: (json['profiles'] as Map<String, dynamic>)
-        .map((key, value) => MapEntry(BigInt.parse(key), value)),
+    pub
+    profiles: (json['profiles'] as Map<String, dynamic>).map((key, value) => MapEntry(BigInt.parse(key), value)),
     privateKey: json['privateKey'],
   );
 }
@@ -82,12 +81,11 @@ Future initPolygonSdk() async {
     if (FFAppState().privateIdentityEntity == null) {
       throw 'no identity information stored on device';
     }
-    print(
-        'initPolygonSdk - attempt to restore existing privateIdentity from secure storage.');
-    privateIdentity =
-        privateIdentityEntityFromJson(FFAppState().privateIdentityEntity);
-    print(
-        'initPolygonSdk - privateIdentity restored for did ${privateIdentity.did}');
+
+    print('initPolygonSdk - attempt to restore existing privateIdentity from secure storage.');
+    privateIdentity = privateIdentityEntityFromJson(FFAppState().privateIdentityEntity);
+    print('initPolygonSdk - privateIdentity restored for did ${privateIdentity.did}');
+
   } catch (e) {
     print(
         'initPolygonSdk -  error restoring privateIdentity: $e.  *** Creating new privateIdentity ***');
@@ -146,9 +144,8 @@ Future initPolygonSdk() async {
       .getProfiles(genesisDid: genesisDid, privateKey: privateKey);
   profiles.forEach((k, v) => print("Nonce : $k, privateDid : $v"));
 
-  print('initPolygonSdk - start circuits download');
-  Stream<DownloadInfo> stream =
-      PolygonIdSdk.I.proof.initCircuitsDownloadAndGetInfoStream;
+
+  Stream<DownloadInfo> stream = PolygonIdSdk.I.proof.initCircuitsDownloadAndGetInfoStream;
 
   FFAppState().update(() {
     FFAppState().isCircuitDownloading = true;
