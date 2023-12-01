@@ -8,7 +8,7 @@ import 'index.dart'; // Imports other custom actions
 import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
-import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
 import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
@@ -36,7 +36,8 @@ class QrcodeParserUtils {
         rawMessage = await _getMessageFromRemote(message);
       }
 
-      Iden3MessageEntity? _iden3Message = await _polygonIdSdk.iden3comm.getIden3Message(message: rawMessage);
+      Iden3MessageEntity? _iden3Message =
+          await _polygonIdSdk.iden3comm.getIden3Message(message: rawMessage);
       return _iden3Message;
     } catch (error) {
       throw Exception("Error while processing the QR code");
@@ -67,15 +68,10 @@ class QrcodeParserUtils {
   }
 }
 
-import 'package:http/http.dart' as http;
-import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
-import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
-import 'dart:convert';
-
 Future<String> authenticateCredential(String message) async {
   // Add your function code here!
 
-
+  print('authenticateCredential -');
   QrcodeParserUtils qrcodeParserUtils = QrcodeParserUtils(PolygonIdSdk.I);
 
   // // Check for URI
@@ -98,13 +94,14 @@ Future<String> authenticateCredential(String message) async {
   //   String prettyprint = encoder.convert(messageDecoded);
   //   debugPrint(prettyprint);
   // } on Exception catch (e) {
-  //   print('authenticateCredential -message: $message');
+  //print('authenticateCredential - message: $message');
   // }
 
   Iden3MessageEntity iden3messageEntity;
   try {
     // iden3messageEntity = await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
-    iden3messageEntity = await qrcodeParserUtils.getIden3MessageFromQrCode(message);
+    iden3messageEntity =
+        await qrcodeParserUtils.getIden3MessageFromQrCode(message);
   } on Exception catch (e) {
     print('authenticateCredential - error decoding message $e');
     return "Error decoding iden3 message: $message";
