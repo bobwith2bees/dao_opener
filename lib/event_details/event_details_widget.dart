@@ -441,6 +441,9 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 FlutterFlowTheme.of(context).secondary,
                           ),
                         );
+                        await actions.addToWallet(
+                          _model.eventTicket,
+                        );
 
                         setState(() {});
                       },
