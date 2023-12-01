@@ -17,3 +17,4 @@ export 'check_identity.dart' show checkIdentity;
 export 'request_credential.dart' show requestCredential;
 export 'authenticate_credential.dart' show authenticateCredential;
 export 'issue_ticket.dart' show issueTicket;
+export 'add_to_wallet.dart' show addToWallet;
