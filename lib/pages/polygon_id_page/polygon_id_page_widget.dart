@@ -451,54 +451,6 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       ),
                     ),
                   ),
-                if (!FFAppState().isCircuitDownloading)
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        _model.authenticateResult2 =
-                            await actions.authenticateCredential(
-                          _model.qrTextController.text,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              _model.authenticateResult2!,
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-
-                        setState(() {});
-                      },
-                      text: 'Authenticate Credential',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                   child: FFButtonWidget(
@@ -554,6 +506,54 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     ),
                   ),
                 ),
+                if (!FFAppState().isCircuitDownloading)
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        _model.authenticateResult2 =
+                            await actions.authenticateCredential(
+                          _model.qrTextController.text,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              _model.authenticateResult2!,
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+
+                        setState(() {});
+                      },
+                      text: 'Authenticate Credential',
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Inter',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
                 if (false)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),

@@ -69,11 +69,6 @@
     <string>We use Bluetooth to listen for the credential requests.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
     <string>We leverage Bluetooth to identify nearby ticket terminals.</string>
-    <key>UIBackgroundModes</key>
-    <array>
-        <string>fetch</string>
-        <string>remote-notification</string>
-    </array>
 
 
 	<key>UILaunchStoryboardName</key>

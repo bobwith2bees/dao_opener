@@ -8,7 +8,6 @@ import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'event_details_widget.dart' show EventDetailsWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
