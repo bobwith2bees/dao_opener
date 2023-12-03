@@ -4,10 +4,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'event_details_model.dart';
@@ -88,25 +90,33 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+              backgroundColor: FlutterFlowTheme.of(context).primary,
               automaticallyImplyLeading: false,
               leading: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
-                  Icons.arrow_back_rounded,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                icon: FaIcon(
+                  FontAwesomeIcons.angleLeft,
+                  color: Colors.white,
                   size: 30.0,
                 ),
                 onPressed: () async {
                   context.pop();
                 },
               ),
+              title: Text(
+                'Events',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Open Sans',
+                      color: Colors.white,
+                      fontSize: 22.0,
+                    ),
+              ),
               actions: [],
               centerTitle: true,
-              elevation: 0.0,
+              elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
@@ -405,6 +415,12 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        setState(() {
+                          _model.generatingProofRequest = true;
+                          _model.generatingProof = false;
+                          _model.generatingTicket = false;
+                          _model.ticketIssued = false;
+                        });
                         _model.eventTicket = await actions.issueTicket(
                           EventTypeStruct(
                             title: eventDetailsEventsRecord?.title,
@@ -428,6 +444,39 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           ),
                           'testing',
                         );
+                        setState(() {
+                          _model.generatingProofRequest = false;
+                          _model.generatingProof = true;
+                        });
+                        final selectedFiles = await selectFiles(
+                          multiFile: false,
+                        );
+                        if (selectedFiles != null) {
+                          setState(() => _model.isDataUploading = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
+
+                          try {
+                            selectedUploadedFiles = selectedFiles
+                                .map((m) => FFUploadedFile(
+                                      name: m.storagePath.split('/').last,
+                                      bytes: m.bytes,
+                                    ))
+                                .toList();
+                          } finally {
+                            _model.isDataUploading = false;
+                          }
+                          if (selectedUploadedFiles.length ==
+                              selectedFiles.length) {
+                            setState(() {
+                              _model.uploadedLocalFile =
+                                  selectedUploadedFiles.first;
+                            });
+                          } else {
+                            setState(() {});
+                            return;
+                          }
+                        }
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -442,7 +491,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           ),
                         );
                         await actions.addToWallet(
-                          _model.eventTicket,
+                          _model.uploadedLocalFile,
                         );
 
                         setState(() {});

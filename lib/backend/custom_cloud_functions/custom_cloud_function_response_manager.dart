@@ -1,18 +1,22 @@
 import '/backend/schema/structs/index.dart';
 
-class MicCheckCloudFunctionCallResponse {
-  MicCheckCloudFunctionCallResponse({
+class VerifyProofCloudFunctionCallResponse {
+  VerifyProofCloudFunctionCallResponse({
     this.errorCode,
     this.succeeded,
     this.jsonBody,
+    this.resultAsString,
+    this.data,
   });
   String? errorCode;
   bool? succeeded;
   dynamic jsonBody;
+  String? resultAsString;
+  String? data;
 }
 
-class VerifyProofCloudFunctionCallResponse {
-  VerifyProofCloudFunctionCallResponse({
+class GenerateProofRequestCloudFunctionCallResponse {
+  GenerateProofRequestCloudFunctionCallResponse({
     this.errorCode,
     this.succeeded,
     this.jsonBody,
