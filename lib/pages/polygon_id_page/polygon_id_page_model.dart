@@ -4,8 +4,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'polygon_id_page_widget.dart' show PolygonIdPageWidget;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +21,17 @@ class PolygonIdPageModel extends FlutterFlowModel<PolygonIdPageWidget> {
   dynamic? addIdentityJson;
   // Stores action output result for [Custom Action - checkIdentity] action in Button widget.
   bool? identityResult;
+  var qrScanResult = '';
+  // State field(s) for QrText widget.
+  FocusNode? qrTextFocusNode;
+  TextEditingController? qrTextController;
+  String? Function(BuildContext, String?)? qrTextControllerValidator;
+  // Stores action output result for [Custom Action - requestCredential] action in Button widget.
+  bool? requestCredentialResult;
+  // Stores action output result for [Custom Action - authenticateCredential] action in Button widget.
+  String? authenticateResult2;
+  // Stores action output result for [Custom Action - authenticateCredential] action in Button widget.
+  String? authenticateResult;
 
   /// Initialization and disposal methods.
 
@@ -26,6 +39,8 @@ class PolygonIdPageModel extends FlutterFlowModel<PolygonIdPageWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    qrTextFocusNode?.dispose();
+    qrTextController?.dispose();
   }
 
   /// Action blocks are added here.

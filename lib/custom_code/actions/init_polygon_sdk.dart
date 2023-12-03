@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:polygonid_flutter_sdk/credential/domain/entities/claim_entity.dart';
+import 'package:polygonid_flutter_sdk/identity/domain/entities/identity_entity.dart';
+import 'package:polygonid_flutter_sdk/proof/domain/entities/download_info_entity.dart';
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
 import 'package:polygonid_flutter_sdk/common/domain/entities/env_entity.dart';
 import 'package:polygonid_flutter_sdk/identity/domain/entities/private_identity_entity.dart';
@@ -23,6 +26,17 @@ import 'package:polygonid_flutter_sdk/identity/domain/entities/private_identity_
 const web3ApiKey = String.fromEnvironment('WEB3_API_KEY');
 const ipfsApiKey = String.fromEnvironment('IPFS_API_KEY');
 const ipfsApiKeySecret = String.fromEnvironment('IPFS_API_KEY_SECRET');
+
+//  DevNote - Modified this private_identity_entity.dart to add cast as Map<String, dynamic>
+PrivateIdentityEntity privateIdentityEntityFromJson(Map<String, dynamic> json) {
+  return PrivateIdentityEntity(
+    did: json['did'],
+    publicKey: List<String>.from(json['publicKey']),
+    profiles: (json['profiles'] as Map<String, dynamic>)
+        .map((key, value) => MapEntry(BigInt.parse(key), value)),
+    privateKey: json['privateKey'],
+  );
+}
 
 Future initPolygonSdk() async {
   print('initPolygonSdk -');
@@ -52,14 +66,41 @@ Future initPolygonSdk() async {
   EnvEntity envEntity = await PolygonIdSdk.I.getEnv();
   // print('initPolygonSdk - $envEntity');
 
-  print('initPolygonSdk - create identity');
-  PrivateIdentityEntity identity = await sdk.identity.addIdentity();
-  // Save identity to AppState
-  FFAppState().update(() {
-    FFAppState().privateIdentityEntity = identity.toJson();
-  });
+  print('initPolygonSdk - getIdentities');
+  List<IdentityEntity> identities = await sdk.identity.getIdentities();
+  if (identities.isNotEmpty) {
+    for (IdentityEntity identity in identities) {
+      print('initPolygonSdk - getIdentities - profiles ${identity.profiles}');
+    }
+  } else {
+    print('initPolygonSdk - getIdentities - No existing identities.');
+  }
 
-  String privateKey = identity.privateKey;
+  // PrivateIdentities have the private key
+  PrivateIdentityEntity privateIdentity;
+  try {
+    if (FFAppState().privateIdentityEntity == null) {
+      throw 'no identity information stored on device';
+    }
+    print(
+        'initPolygonSdk - attempt to restore existing privateIdentity from secure storage.');
+    privateIdentity =
+        privateIdentityEntityFromJson(FFAppState().privateIdentityEntity);
+    print(
+        'initPolygonSdk - privateIdentity restored for did ${privateIdentity.did}');
+  } catch (e) {
+    print(
+        'initPolygonSdk -  error restoring privateIdentity: $e.  *** Creating new privateIdentity ***');
+    privateIdentity = await sdk.identity.addIdentity();
+    // Save identity to AppState
+    FFAppState().update(() {
+      FFAppState().privateIdentityEntity = privateIdentity.toJson();
+      FFAppState().identityBlockchain = envEntity.blockchain;
+      FFAppState().identityNetwork = envEntity.network;
+    });
+  }
+
+  String privateKey = privateIdentity.privateKey;
   String identifier = await sdk.identity.getDidIdentifier(
     privateKey: privateKey,
     blockchain: env.blockchain,
@@ -81,6 +122,65 @@ Future initPolygonSdk() async {
   });
 
   print('initPolygonSdk - privateKey: $privateKey, genesisDid $genesisDid');
+
+  // What Claims do we have?
+  List<ClaimEntity> claimList = await sdk.credential.getClaims(
+    genesisDid: privateIdentity.did,
+    privateKey: privateIdentity.privateKey,
+  );
+
+  if (claimList.isNotEmpty) {
+    for (ClaimEntity claimEntity in claimList) {
+      print('initPolygonSdk - claim: $claimEntity');
+
+      // if (claimList.length > 2) {
+      //   print('removing old claim ${claimEntity.type}');
+      //   await sdk.credential.removeClaim(claimId: claimEntity.id, genesisDid: genesisDid, privateKey: privateKey);
+      // }
+    }
+  } else {
+    print('initPolygonSdk - no claims found');
+  }
+
+  Map<BigInt, String> profiles = await sdk.identity
+      .getProfiles(genesisDid: genesisDid, privateKey: privateKey);
+  profiles.forEach((k, v) => print("Nonce : $k, privateDid : $v"));
+
+  print('initPolygonSdk - start circuits download');
+  Stream<DownloadInfo> stream =
+      PolygonIdSdk.I.proof.initCircuitsDownloadAndGetInfoStream;
+
+  FFAppState().update(() {
+    FFAppState().isCircuitDownloading = true;
+  });
+
+  StreamSubscription? _subscription;
+  _subscription = stream.listen((downloadInfo) {
+    switch (downloadInfo.downloadInfoType) {
+      case DownloadInfoType.onDone:
+        print('StreamSubscription - circuits download complete');
+        FFAppState().update(() {
+          FFAppState().isCircuitDownloading = false;
+        });
+        break;
+
+      case DownloadInfoType.onError:
+        print('StreamSubscription - circuits download error $downloadInfo');
+        FFAppState().update(() {
+          FFAppState().isCircuitDownloading = false;
+        });
+        break;
+
+      case DownloadInfoType.onProgress:
+      default:
+        break;
+    }
+
+    // Suppress lots of status updates
+    //if (downloadInfo.downloadInfoType != DownloadInfoType.onProgress) {
+    print('circuits download event - $downloadInfo');
+    //}
+  });
 
   // Iden3MessageEntity iden3messageEntity =
   //     await PolygonIdSdk.I.iden3comm.getIden3Message(message: "This is the message");

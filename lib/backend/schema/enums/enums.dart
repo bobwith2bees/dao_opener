@@ -24,6 +24,18 @@ enum EventType {
   private,
 }
 
+enum ClamModelState {
+  active,
+  expired,
+  pending,
+  revoked,
+}
+
+enum TicketType {
+  Standard,
+  VIP,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -43,6 +55,10 @@ T? deserializeEnum<T>(String? value) {
       return VenueType.values.deserialize(value) as T?;
     case (EventType):
       return EventType.values.deserialize(value) as T?;
+    case (ClamModelState):
+      return ClamModelState.values.deserialize(value) as T?;
+    case (TicketType):
+      return TicketType.values.deserialize(value) as T?;
     default:
       return null;
   }
