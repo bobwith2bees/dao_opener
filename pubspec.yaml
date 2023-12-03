@@ -100,7 +100,6 @@ dependencies:
     git:
       url: ssh://git@github.com/0xPolygonID/polygonid-flutter-sdk.git
       ref: 5a2ae7aa7f538985622adff7ab8969ecd91f4829
-#      ref: main
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -109,7 +108,6 @@ dependencies:
 dependency_overrides:
   # DevNote - Added outside of FlutterFlow to avoid conflict with polygonid_flutter_sdk which wants v2.0.15
   path_provider: 2.0.14
-
 
 dev_dependencies:
   flutter_launcher_icons: 0.13.1
