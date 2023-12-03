@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,6 +32,13 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EventDetailsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.addToWallet(
+        _model.uploadedLocalFile,
+      );
+    });
   }
 
   @override
@@ -421,6 +429,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           _model.generatingProof = false;
                           _model.generatingTicket = false;
                           _model.ticketIssued = false;
+                          _model.credentialAuthenticated = false;
+                          _model.proofRequestGenerated = false;
                         });
                         _model.proofRequestOutput =
                             await actions.generateProofRequest(
@@ -488,84 +498,14 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
+                          setState(() {
+                            _model.credentialAuthenticated = true;
+                          });
                         } else {
                           if (_shouldSetState) setState(() {});
                           return;
                         }
 
-                        _model.eventTicket = await actions.issueTicket(
-                          EventTypeStruct(
-                            title: eventDetailsEventsRecord?.title,
-                            description: eventDetailsEventsRecord?.description,
-                            venueName: eventDetailsEventsRecord?.venueName,
-                            venueAddress:
-                                eventDetailsEventsRecord?.venueAddress,
-                            startTime: eventDetailsEventsRecord?.startTime,
-                            endTime: eventDetailsEventsRecord?.endTime,
-                            doorsOpen: eventDetailsEventsRecord?.doorsOpen,
-                            location: eventDetailsEventsRecord?.location,
-                            bands: eventDetailsEventsRecord?.bands,
-                            beaconUUID: eventDetailsEventsRecord?.beaconUUID,
-                            nfcSupported:
-                                eventDetailsEventsRecord?.nfcSupported,
-                            food: eventDetailsEventsRecord?.food,
-                            drink: eventDetailsEventsRecord?.drink,
-                            parking: eventDetailsEventsRecord?.parking,
-                            venueType: eventDetailsEventsRecord?.venueType,
-                            eventType: eventDetailsEventsRecord?.eventType,
-                          ),
-                          'testing',
-                        );
-                        _shouldSetState = true;
-                        setState(() {
-                          _model.generatingProofRequest = false;
-                          _model.generatingProof = true;
-                        });
-                        final selectedFiles = await selectFiles(
-                          multiFile: false,
-                        );
-                        if (selectedFiles != null) {
-                          setState(() => _model.isDataUploading = true);
-                          var selectedUploadedFiles = <FFUploadedFile>[];
-
-                          try {
-                            selectedUploadedFiles = selectedFiles
-                                .map((m) => FFUploadedFile(
-                                      name: m.storagePath.split('/').last,
-                                      bytes: m.bytes,
-                                    ))
-                                .toList();
-                          } finally {
-                            _model.isDataUploading = false;
-                          }
-                          if (selectedUploadedFiles.length ==
-                              selectedFiles.length) {
-                            setState(() {
-                              _model.uploadedLocalFile =
-                                  selectedUploadedFiles.first;
-                            });
-                          } else {
-                            setState(() {});
-                            return;
-                          }
-                        }
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Ticket Issue Request Complete',
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-                        await actions.addToWallet(
-                          _model.uploadedLocalFile,
-                        );
                         if (_shouldSetState) setState(() {});
                       },
                       child: Container(
@@ -588,12 +528,148 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         ),
                         alignment: AlignmentDirectional(0.00, 0.00),
                         child: Text(
-                          'Get Tickets',
+                          'Request Ticket',
                           style: FlutterFlowTheme.of(context).titleSmall,
                         ),
                       ),
                     ),
                   ),
+                  if (_model.credentialAuthenticated && !_model.ticketIssued!)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          _model.eventTicketCopy = await actions.issueTicket(
+                            EventTypeStruct(
+                              title: eventDetailsEventsRecord?.title,
+                              description:
+                                  eventDetailsEventsRecord?.description,
+                              venueName: eventDetailsEventsRecord?.venueName,
+                              venueAddress:
+                                  eventDetailsEventsRecord?.venueAddress,
+                              startTime: eventDetailsEventsRecord?.startTime,
+                              endTime: eventDetailsEventsRecord?.endTime,
+                              doorsOpen: eventDetailsEventsRecord?.doorsOpen,
+                              location: eventDetailsEventsRecord?.location,
+                              bands: eventDetailsEventsRecord?.bands,
+                              beaconUUID: eventDetailsEventsRecord?.beaconUUID,
+                              nfcSupported:
+                                  eventDetailsEventsRecord?.nfcSupported,
+                              food: eventDetailsEventsRecord?.food,
+                              drink: eventDetailsEventsRecord?.drink,
+                              parking: eventDetailsEventsRecord?.parking,
+                              venueType: eventDetailsEventsRecord?.venueType,
+                              eventType: eventDetailsEventsRecord?.eventType,
+                            ),
+                            'testing',
+                          );
+                          final selectedFiles = await selectFiles(
+                            multiFile: false,
+                          );
+                          if (selectedFiles != null) {
+                            setState(() => _model.isDataUploading = true);
+                            var selectedUploadedFiles = <FFUploadedFile>[];
+
+                            try {
+                              selectedUploadedFiles = selectedFiles
+                                  .map((m) => FFUploadedFile(
+                                        name: m.storagePath.split('/').last,
+                                        bytes: m.bytes,
+                                      ))
+                                  .toList();
+                            } finally {
+                              _model.isDataUploading = false;
+                            }
+                            if (selectedUploadedFiles.length ==
+                                selectedFiles.length) {
+                              setState(() {
+                                _model.uploadedLocalFile =
+                                    selectedUploadedFiles.first;
+                              });
+                            } else {
+                              setState(() {});
+                              return;
+                            }
+                          }
+
+                          setState(() {
+                            _model.generatingTicket = false;
+                            _model.ticketIssued = true;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Ticket Issue Request Complete',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+
+                          setState(() {});
+                        },
+                        text: 'Issue Ticket',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ),
+                  if (_model.ticketIssued ?? true)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await actions.addToWallet(
+                            _model.uploadedLocalFile,
+                          );
+                        },
+                        text: 'Add to Wallet',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

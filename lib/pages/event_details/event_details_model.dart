@@ -8,6 +8,7 @@ import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'event_details_widget.dart' show EventDetailsWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -27,6 +28,10 @@ class EventDetailsModel extends FlutterFlowModel<EventDetailsWidget> {
 
   String? proofRequest = '';
 
+  bool credentialAuthenticated = false;
+
+  bool proofRequestGenerated = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -34,8 +39,8 @@ class EventDetailsModel extends FlutterFlowModel<EventDetailsWidget> {
   dynamic? proofRequestOutput;
   // Stores action output result for [Custom Action - authenticateCredential] action in button_2 widget.
   String? authenticateResult;
-  // Stores action output result for [Custom Action - issueTicket] action in button_2 widget.
-  FFUploadedFile? eventTicket;
+  // Stores action output result for [Custom Action - issueTicket] action in Button widget.
+  FFUploadedFile? eventTicketCopy;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
