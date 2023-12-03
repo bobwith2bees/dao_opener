@@ -80,7 +80,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
             },
           ),
           title: Text(
-            'PolygonID',
+            'PolygonID Dev',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
                   color: Colors.white,
@@ -118,7 +118,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                                       child: Text(
                                     FFAppState().identityGenesisId,
                                     textAlign: TextAlign.start,
-                                    maxLines: 3,
+                                    maxLines: 4,
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                   )),
@@ -276,6 +276,19 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     ),
                   ),
                 ),
+                Align(
+                  alignment: AlignmentDirectional(0.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                    child: SelectionArea(
+                        child: Text(
+                      'Scan a Credential or Proof Request QR',
+                      textAlign: TextAlign.start,
+                      maxLines: 3,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    )),
+                  ),
+                ),
                 FlutterFlowIconButton(
                   borderColor: FlutterFlowTheme.of(context).primary,
                   borderRadius: 20.0,
@@ -302,6 +315,19 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
 
                     setState(() {});
                   },
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                    child: SelectionArea(
+                        child: Text(
+                      'Then tap the corresponding button to process.',
+                      textAlign: TextAlign.start,
+                      maxLines: 3,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    )),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -473,55 +499,6 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       ),
                     ),
                   ),
-                if (!FFAppState().isCircuitDownloading)
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        _model.authenticateResult =
-                            await actions.authenticateCredential(
-                          _model.qrTextController.text,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              _model.authenticateResult!,
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-
-                        setState(() {});
-                      },
-                      text: 'Authenticate',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
                 if (false)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
@@ -612,6 +589,90 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       ),
                     ),
                   ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      _model.proofRequestResponse =
+                          await actions.generateProofRequest(
+                        'MembershipCredential',
+                        'ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui',
+                        'did.eth.bobwith2bees',
+                        '11',
+                        'credentialAtomicQuerySigV2',
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            _model.proofRequestResponse!.toString(),
+                            style: TextStyle(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                            ),
+                          ),
+                          duration: Duration(milliseconds: 4000),
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondary,
+                        ),
+                      );
+                      setState(() {
+                        _model.qrTextController?.text =
+                            _model.proofRequestResponse!.toString();
+                      });
+
+                      setState(() {});
+                    },
+                    text: 'Generate Proof Request',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter',
+                                color: Colors.white,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      print('Button pressed ...');
+                    },
+                    text: 'Verify Auth Response',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter',
+                                color: Colors.white,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
