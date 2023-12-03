@@ -1,0 +1,29 @@
+{
+  "formatVersion" : 1,
+  "passTypeIdentifier" : "pass.com.fifthpint.daoopener",
+  "teamIdentifier" : "Z9J3PBB3V9",
+  "webServiceURL" : "https://firebasestorage.googleapis.com/v0/b/fifthpint-common-dev.appspot.com/o/passes/",
+  "authenticationToken" : "vxwxd7J8AlNNFPS8k0a0FfUFtq0ewzFdc",
+  "relevantDate" : "2023-12-01T13:00-08:00",
+  "locations" : [],
+  "barcode" : {
+    "message" : "123456789",
+    "codeAlt": "Ticket Number",
+    "format" : "PKBarcodeFormatPDF417",
+    "messageEncoding" : "iso-8859-1"
+  },
+  "organizationName" : "Fifthpint, LLC",
+  "description" : "DAO Event Ticket",
+  "foregroundColor" : "rgb(255, 255, 255)",
+  "backgroundColor" : "rgb(60, 65, 76)",
+  "eventTicket" : {
+    "primaryFields" : [],
+	"secondaryFields" : []
+  },
+  "beacons": [
+    {
+      "proximityUUID":"5A09ECEE-C70D-4256-860E-23E3B21B9E88",
+      "relevantText":"Prove you DAO membership to get in",
+      "name" : "Nearby Event"
+    } ]
+}
