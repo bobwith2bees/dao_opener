@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:word_generator/word_generator.dart';
+
 Future<dynamic> generateProofRequest(
   String? credentialType,
   String? ldContext,
@@ -18,19 +21,27 @@ Future<dynamic> generateProofRequest(
 ) async {
   // Add your function code here!
 
+  final wordGenerator = WordGenerator();
+  List<String> nouns = wordGenerator.randomNouns(3);
+
+  // sessionId ??= nouns.join();
+  sessionId = nouns.join();
+
   try {
     final result = await FirebaseFunctions.instance
         .httpsCallable('polygonId-generateProofRequest')
         .call(
       {
-        "credentialType": credentialType,
+        "type": credentialType,
         "ldContext": ldContext,
         "sender": sender,
         "sessionId": sessionId,
         "circuitId": circuitId,
       },
     );
-    return result.data as String;
+
+    print('result.data: ${result.data}');
+    return jsonEncode(result.data);
   } on FirebaseFunctionsException catch (error) {
     print(error.code);
     print(error.details);

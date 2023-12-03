@@ -16,16 +16,12 @@ import 'dart:io';
 Future addToWallet(FFUploadedFile? passFile) async {
   /// It returns [PasskitFile] object
 
-  if (Platform.isAndroid) {
-    print('package does not support Google Passes yet');
-    return;
-  }
-
   if (passFile == null) {
     print('addToWallet - No file to add.');
     return;
   } else {
-    print('addToWallet - name: ${passFile.name}, bytes: ${passFile.bytes?.length ?? 0}');
+    print(
+        'addToWallet - name: ${passFile.name}, bytes: ${passFile.bytes?.length ?? 0}');
   }
 
   // Drop a copy in the appliation's document folder for save keeping, and the library flutter_wallet_card wants a file.
@@ -39,7 +35,8 @@ Future addToWallet(FFUploadedFile? passFile) async {
   passFileOnDisk.writeAsBytesSync(passFile.bytes ?? []);
 
   print('addToWallet - extracting pass contents}');
-  final passkitFile = await FlutterWalletCard.generateFromFile(id: 'dao-opener', file: passFileOnDisk);
+  final passkitFile = await FlutterWalletCard.generateFromFile(
+      id: 'dao-opener', file: passFileOnDisk);
 
   print('addToWallet - user clicked addPasskit to wallet}');
   final completed = await FlutterWalletCard.addPasskit(passkitFile);
