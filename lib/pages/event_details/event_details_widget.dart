@@ -415,12 +415,84 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        var _shouldSetState = false;
                         setState(() {
                           _model.generatingProofRequest = true;
                           _model.generatingProof = false;
                           _model.generatingTicket = false;
                           _model.ticketIssued = false;
                         });
+                        _model.proofRequestOutput =
+                            await actions.generateProofRequest(
+                          'MembershipCredential',
+                          'ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui',
+                          'did:eth:cryptotomorrow',
+                          null,
+                          'credentialAtomicQuerySigV2',
+                        );
+                        _shouldSetState = true;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              _model.proofRequestOutput!.toString(),
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                        var confirmDialogResponse = await showDialog<bool>(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title:
+                                      Text('Credential Verificaiton Required'),
+                                  content: Text(
+                                      'Good news your uh Mansplain DAO credential can get you in the door.  Use this credential stored in your default identity?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, false),
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, true),
+                                      child: Text('Confirm'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ) ??
+                            false;
+                        if (confirmDialogResponse) {
+                          _model.authenticateResult =
+                              await actions.authenticateCredential(
+                            _model.proofRequestOutput!.toString(),
+                          );
+                          _shouldSetState = true;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                _model.authenticateResult!,
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                        } else {
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+
                         _model.eventTicket = await actions.issueTicket(
                           EventTypeStruct(
                             title: eventDetailsEventsRecord?.title,
@@ -444,6 +516,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           ),
                           'testing',
                         );
+                        _shouldSetState = true;
                         setState(() {
                           _model.generatingProofRequest = false;
                           _model.generatingProof = true;
@@ -493,8 +566,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         await actions.addToWallet(
                           _model.uploadedLocalFile,
                         );
-
-                        setState(() {});
+                        if (_shouldSetState) setState(() {});
                       },
                       child: Container(
                         width: double.infinity,
