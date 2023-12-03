@@ -414,126 +414,121 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 12.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        var _shouldSetState = false;
-                        setState(() {
-                          _model.generatingProofRequest = true;
-                          _model.generatingProof = false;
-                          _model.generatingTicket = false;
-                          _model.ticketIssued = false;
-                          _model.credentialAuthenticated = false;
-                          _model.proofRequestGenerated = false;
-                        });
-                        _model.proofRequestOutput =
-                            await actions.generateProofRequest(
-                          'MembershipCredential',
-                          'ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui',
-                          'did:eth:cryptotomorrow',
-                          null,
-                          'credentialAtomicQuerySigV2',
-                        );
-                        _shouldSetState = true;
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              _model.proofRequestOutput!.toString(),
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-                        var confirmDialogResponse = await showDialog<bool>(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title:
-                                      Text('Credential Verificaiton Required'),
-                                  content: Text(
-                                      'Good news your uh Mansplain DAO credential can get you in the door.  Use this credential stored in your default identity?'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, false),
-                                      child: Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, true),
-                                      child: Text('Confirm'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ) ??
-                            false;
-                        if (confirmDialogResponse) {
-                          _model.authenticateResult =
-                              await actions.authenticateCredential(
-                            _model.proofRequestOutput!.toString(),
-                          );
-                          _shouldSetState = true;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                _model.authenticateResult!,
-                                style: TextStyle(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).secondary,
-                            ),
-                          );
+                  if (!_model.ticketIssued! && _model.proofRequestGenerated)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          var _shouldSetState = false;
                           setState(() {
-                            _model.credentialAuthenticated = true;
+                            _model.generatingProofRequest = true;
+                            _model.generatingProof = false;
+                            _model.generatingTicket = false;
+                            _model.ticketIssued = false;
+                            _model.credentialAuthenticated = false;
+                            _model.proofRequestGenerated = false;
                           });
-                        } else {
-                          if (_shouldSetState) setState(() {});
-                          return;
-                        }
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text(
+                                        'Credential Verificaiton Required'),
+                                    content: Text(
+                                        'Good news your uh Mansplain DAO credential can get you in the door.  Use this credential stored in your default identity?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('Confirm'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                          if (confirmDialogResponse) {
+                            _model.proofRequestOutput =
+                                await actions.generateProofRequest(
+                              'MembershipCredential',
+                              'ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui',
+                              'did:eth:cryptotomorrow',
+                              null,
+                              'credentialAtomicQuerySigV2',
+                            );
+                            _shouldSetState = true;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  _model.proofRequestOutput!.toString(),
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                            _model.authenticateResuls =
+                                await actions.authenticateCredential(
+                              _model.proofRequestOutput!.toString(),
+                            );
+                            _shouldSetState = true;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  _model.authenticateResuls!,
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                            setState(() {
+                              _model.credentialAuthenticated = true;
+                            });
+                          } else {
+                            if (_shouldSetState) setState(() {});
+                            return;
+                          }
 
-                        if (_shouldSetState) setState(() {});
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 50.0,
-                        decoration: BoxDecoration(
+                          if (_shouldSetState) setState(() {});
+                        },
+                        text: 'Request To Attend',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4.0,
-                              color: Color(0x33000000),
-                              offset: Offset(0.0, 2.0),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).accent1,
-                            width: 2.0,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
                           ),
-                        ),
-                        alignment: AlignmentDirectional(0.00, 0.00),
-                        child: Text(
-                          'Request Ticket',
-                          style: FlutterFlowTheme.of(context).titleSmall,
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
                     ),
-                  ),
                   if (_model.credentialAuthenticated && !_model.ticketIssued!)
                     Padding(
                       padding:
