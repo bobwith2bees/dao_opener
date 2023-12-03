@@ -112,34 +112,29 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                               Align(
                                 alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 8.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 0.0),
                                   child: SelectionArea(
                                       child: Text(
                                     FFAppState().identityGenesisId,
                                     textAlign: TextAlign.start,
                                     maxLines: 4,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context).bodyMedium,
                                   )),
                                 ),
                               ),
                               FlutterFlowIconButton(
-                                borderColor:
-                                    FlutterFlowTheme.of(context).primary,
+                                borderColor: FlutterFlowTheme.of(context).primary,
                                 borderRadius: 20.0,
                                 borderWidth: 1.0,
                                 buttonSize: 40.0,
                                 fillColor: FlutterFlowTheme.of(context).accent1,
                                 icon: Icon(
                                   Icons.content_copy,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  color: FlutterFlowTheme.of(context).primaryText,
                                   size: 24.0,
                                 ),
                                 onPressed: () async {
-                                  await Clipboard.setData(ClipboardData(
-                                      text: FFAppState().identityGenesisId));
+                                  await Clipboard.setData(ClipboardData(text: FFAppState().identityGenesisId));
                                 },
                               ),
                             ],
@@ -150,24 +145,20 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                               Align(
                                 alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 0.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 0.0, 0.0),
                                   child: Text(
                                     FFAppState().identityBlockchain,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ),
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 0.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 0.0, 0.0),
                                   child: Text(
                                     FFAppState().identityNetwork,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ),
                               ),
@@ -177,12 +168,10 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                             Align(
                               alignment: AlignmentDirectional(0.00, 0.00),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 0.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 0.0, 0.0),
                                 child: Text(
                                   'Circuits are still downloading.  Please wait.',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                               ),
                             ),
@@ -195,8 +184,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                   thickness: 1.0,
                   color: FlutterFlowTheme.of(context).accent4,
                 ),
-                if (FFAppState().idendityPrivateKey == null ||
-                    FFAppState().idendityPrivateKey == '')
+                if (FFAppState().idendityPrivateKey == null || FFAppState().idendityPrivateKey == '')
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                     child: FFButtonWidget(
@@ -211,16 +199,13 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
+                            ),
                         elevation: 3.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -246,8 +231,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                             ),
                           ),
                           duration: Duration(milliseconds: 4000),
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondary,
+                          backgroundColor: FlutterFlowTheme.of(context).secondary,
                         ),
                       );
 
@@ -257,16 +241,13 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Inter',
-                                color: Colors.white,
-                              ),
+                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                            fontFamily: 'Inter',
+                            color: Colors.white,
+                          ),
                       elevation: 3.0,
                       borderSide: BorderSide(
                         color: Colors.transparent,
@@ -301,8 +282,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     size: 48.0,
                   ),
                   onPressed: () async {
-                    _model.qrScanResult =
-                        await FlutterBarcodeScanner.scanBarcode(
+                    _model.qrScanResult = await FlutterBarcodeScanner.scanBarcode(
                       '#C62828', // scanning line color
                       'Cancel', // cancel button text
                       true, // whether to show the flash icon
@@ -395,8 +375,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       maxLines: null,
                       minLines: 5,
                       keyboardType: TextInputType.url,
-                      validator:
-                          _model.qrTextControllerValidator.asValidator(context),
+                      validator: _model.qrTextControllerValidator.asValidator(context),
                     ),
                   ),
                 ),
@@ -405,8 +384,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        _model.requestCredentialResult =
-                            await actions.requestCredential(
+                        _model.requestCredentialResult = await actions.requestCredential(
                           _model.qrTextController.text,
                           null,
                           null,
@@ -421,8 +399,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                               ),
                             ),
                             duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
+                            backgroundColor: FlutterFlowTheme.of(context).secondary,
                           ),
                         );
 
@@ -432,64 +409,13 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                if (!FFAppState().isCircuitDownloading)
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        _model.authenticateResult2 =
-                            await actions.authenticateCredential(
-                          _model.qrTextController.text,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              _model.authenticateResult2!,
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
+                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
                             ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-
-                        setState(() {});
-                      },
-                      text: 'Authenticate Credential',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
                         elevation: 3.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -503,8 +429,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      _model.proofRequestResponse =
-                          await actions.generateProofRequest(
+                      _model.proofRequestResponse = await actions.generateProofRequest(
                         'MembershipCredential',
                         'ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui',
                         'did.eth.bobwith2bees',
@@ -520,13 +445,11 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                             ),
                           ),
                           duration: Duration(milliseconds: 4000),
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondary,
+                          backgroundColor: FlutterFlowTheme.of(context).secondary,
                         ),
                       );
                       setState(() {
-                        _model.qrTextController?.text =
-                            _model.proofRequestResponse!.toString();
+                        _model.qrTextController?.text = _model.proofRequestResponse!.toString();
                       });
 
                       setState(() {});
@@ -535,16 +458,13 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Inter',
-                                color: Colors.white,
-                              ),
+                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                            fontFamily: 'Inter',
+                            color: Colors.white,
+                          ),
                       elevation: 3.0,
                       borderSide: BorderSide(
                         color: Colors.transparent,
@@ -554,6 +474,49 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     ),
                   ),
                 ),
+                if (!FFAppState().isCircuitDownloading)
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        _model.authenticateResult2 = await actions.authenticateCredential(
+                          _model.qrTextController.text,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              _model.authenticateResult2!,
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor: FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+
+                        setState(() {});
+                      },
+                      text: 'Authenticate Credential',
+                      options: FFButtonOptions(
+                        width: double.infinity,
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
+                            ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
                 if (false)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
@@ -565,16 +528,13 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
+                            ),
                         elevation: 3.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -595,16 +555,13 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
+                            ),
                         elevation: 3.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -625,16 +582,13 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
+                            ),
                         elevation: 3.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,

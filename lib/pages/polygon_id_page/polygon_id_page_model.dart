@@ -28,10 +28,10 @@ class PolygonIdPageModel extends FlutterFlowModel<PolygonIdPageWidget> {
   String? Function(BuildContext, String?)? qrTextControllerValidator;
   // Stores action output result for [Custom Action - requestCredential] action in Button widget.
   bool? requestCredentialResult;
-  // Stores action output result for [Custom Action - authenticateCredential] action in Button widget.
-  String? authenticateResult2;
   // Stores action output result for [Custom Action - generateProofRequest] action in Button widget.
   dynamic? proofRequestResponse;
+  // Stores action output result for [Custom Action - authenticateCredential] action in Button widget.
+  String? authenticateResult2;
 
   /// Initialization and disposal methods.
 
