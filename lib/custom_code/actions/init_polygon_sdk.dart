@@ -32,8 +32,7 @@ PrivateIdentityEntity privateIdentityEntityFromJson(Map<String, dynamic> json) {
   return PrivateIdentityEntity(
     did: json['did'],
     publicKey: List<String>.from(json['publicKey']),
-    profiles: (json['profiles'] as Map<String, dynamic>)
-        .map((key, value) => MapEntry(BigInt.parse(key), value)),
+    profiles: (json['profiles'] as Map<String, dynamic>).map((key, value) => MapEntry(BigInt.parse(key), value)),
     privateKey: json['privateKey'],
   );
 }
@@ -65,6 +64,11 @@ Future initPolygonSdk() async {
   print('initPolygonSdk - get EnvEntity');
   EnvEntity envEntity = await PolygonIdSdk.I.getEnv();
   // print('initPolygonSdk - $envEntity');
+  // Save environment to AppState
+  FFAppState().update(() {
+    FFAppState().identityBlockchain = envEntity.blockchain;
+    FFAppState().identityNetwork = envEntity.network;
+  });
 
   print('initPolygonSdk - getIdentities');
   List<IdentityEntity> identities = await sdk.identity.getIdentities();
@@ -82,21 +86,17 @@ Future initPolygonSdk() async {
     if (FFAppState().privateIdentityEntity == null) {
       throw 'no identity information stored on device';
     }
-    print(
-        'initPolygonSdk - attempt to restore existing privateIdentity from secure storage.');
-    privateIdentity =
-        privateIdentityEntityFromJson(FFAppState().privateIdentityEntity);
-    print(
-        'initPolygonSdk - privateIdentity restored for did ${privateIdentity.did}');
+    print('initPolygonSdk - attempt to restore existing privateIdentity from secure storage.');
+    privateIdentity = privateIdentityEntityFromJson(FFAppState().privateIdentityEntity);
+    print('initPolygonSdk - privateIdentity restored for did ${privateIdentity.did}');
   } catch (e) {
-    print(
-        'initPolygonSdk -  error restoring privateIdentity: $e.  *** Creating new privateIdentity ***');
+    print('initPolygonSdk -  error restoring privateIdentity: $e.  *** Creating new privateIdentity ***');
     privateIdentity = await sdk.identity.addIdentity();
     // Save identity to AppState
     FFAppState().update(() {
       FFAppState().privateIdentityEntity = privateIdentity.toJson();
-      FFAppState().identityBlockchain = envEntity.blockchain;
-      FFAppState().identityNetwork = envEntity.network;
+
+      /// IOS error?
     });
   }
 
@@ -132,23 +132,22 @@ Future initPolygonSdk() async {
   if (claimList.isNotEmpty) {
     for (ClaimEntity claimEntity in claimList) {
       print('initPolygonSdk - claim: $claimEntity');
-
+      // TODO: Remove orphaned credentials
       // if (claimList.length > 2) {
-      //   print('removing old claim ${claimEntity.type}');
-      //   await sdk.credential.removeClaim(claimId: claimEntity.id, genesisDid: genesisDid, privateKey: privateKey);
+      // print('removing old claim ${claimEntity.type}');
+      // await sdk.credential.removeClaim(claimId: claimEntity.id, genesisDid: genesisDid, privateKey: privateKey);
       // }
     }
   } else {
     print('initPolygonSdk - no claims found');
   }
 
-  Map<BigInt, String> profiles = await sdk.identity
-      .getProfiles(genesisDid: genesisDid, privateKey: privateKey);
-  profiles.forEach((k, v) => print("Nonce : $k, privateDid : $v"));
+  // IOS had corrupted data when enumerating?  Commenting out for now
+  // Map<BigInt, String> profiles = await sdk.identity.getProfiles(genesisDid: genesisDid, privateKey: privateKey);
+  // profiles.forEach((k, v) => print("Nonce : $k, privateDid : $v"));
 
   print('initPolygonSdk - start circuits download');
-  Stream<DownloadInfo> stream =
-      PolygonIdSdk.I.proof.initCircuitsDownloadAndGetInfoStream;
+  Stream<DownloadInfo> stream = PolygonIdSdk.I.proof.initCircuitsDownloadAndGetInfoStream;
 
   FFAppState().update(() {
     FFAppState().isCircuitDownloading = true;
