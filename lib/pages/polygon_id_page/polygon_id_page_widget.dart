@@ -80,7 +80,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
             },
           ),
           title: Text(
-            'PolygonID',
+            'PolygonID Dev',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
                   color: Colors.white,
@@ -118,7 +118,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                                       child: Text(
                                     FFAppState().identityGenesisId,
                                     textAlign: TextAlign.start,
-                                    maxLines: 3,
+                                    maxLines: 4,
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                   )),
@@ -276,6 +276,19 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     ),
                   ),
                 ),
+                Align(
+                  alignment: AlignmentDirectional(0.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                    child: SelectionArea(
+                        child: Text(
+                      'Scan the Request of Authenticate QR',
+                      textAlign: TextAlign.start,
+                      maxLines: 3,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    )),
+                  ),
+                ),
                 FlutterFlowIconButton(
                   borderColor: FlutterFlowTheme.of(context).primary,
                   borderRadius: 20.0,
@@ -302,6 +315,19 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
 
                     setState(() {});
                   },
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                    child: SelectionArea(
+                        child: Text(
+                      'Then tap the corresponding button to process.',
+                      textAlign: TextAlign.start,
+                      maxLines: 3,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    )),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
@@ -451,55 +477,6 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                         setState(() {});
                       },
                       text: 'Authenticate Credential',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                if (!FFAppState().isCircuitDownloading)
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        _model.authenticateResult =
-                            await actions.authenticateCredential(
-                          _model.qrTextController.text,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              _model.authenticateResult!,
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-
-                        setState(() {});
-                      },
-                      text: 'Authenticate',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 40.0,
