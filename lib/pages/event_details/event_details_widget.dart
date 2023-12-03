@@ -436,7 +436,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           'testing',
                         );
                         setState(() {
-                          _model.ticketIssued = true;
+                          _model.generatingProofRequest = false;
+                          _model.generatingProof = true;
                         });
                         final selectedFiles = await selectFiles(
                           multiFile: false,
@@ -467,9 +468,6 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           }
                         }
 
-                        await actions.addToWallet(
-                          _model.uploadedLocalFile,
-                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -482,6 +480,9 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             backgroundColor:
                                 FlutterFlowTheme.of(context).secondary,
                           ),
+                        );
+                        await actions.addToWallet(
+                          _model.uploadedLocalFile,
                         );
 
                         setState(() {});
