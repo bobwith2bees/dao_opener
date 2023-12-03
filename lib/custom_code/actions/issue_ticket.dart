@@ -1,5 +1,4 @@
 // Automatic FlutterFlow imports
-
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
@@ -24,7 +23,8 @@ Future<FFUploadedFile?> issueTicket(
 
   print('Event: ${eventData.title}, $eventData');
   // http post to a url with the body consisting of  json formatted eventReference.
-  final url = 'https://us-central1-fifthpint-common-dev.cloudfunctions.net/pass';
+  final url =
+      'https://us-central1-fifthpint-common-dev.cloudfunctions.net/pass';
   final headers = <String, String>{
     'Content-Type': 'application/json',
     // 'User-Agent': 'PostmanRuntime/7.35.0',
@@ -55,8 +55,18 @@ Future<FFUploadedFile?> issueTicket(
     ],
     "auxiliary": [
       {"label": "Time", "value": "7pm to Midnight"},
-      {"label": "Bar", "value": (eventData.drink == BarOptions.openBar) ? "Open Bar" : "For Purchase"},
-      {"label": "Food", "value": (eventData.food == FoodOptions.forPurchase) ? "For Purchase" : "None"},
+      {
+        "label": "Bar",
+        "value": (eventData.drink == BarOptions.openBar)
+            ? "Open Bar"
+            : "For Purchase"
+      },
+      {
+        "label": "Food",
+        "value": (eventData.food == FoodOptions.forPurchase)
+            ? "For Purchase"
+            : "None"
+      },
     ],
     "qrText": "This is the ticket number",
     "codeAlt": "Ticket Number",
@@ -77,12 +87,14 @@ Future<FFUploadedFile?> issueTicket(
 
   final HttpClientResponse response = await request.close();
 
-  print('Response ${response.statusCode} with length ${response.contentLength}');
+  print(
+      'Response ${response.statusCode} with length ${response.contentLength}');
 
   // final response = await http.post(Uri.parse(url), headers: headers, body: jsonEncode(eventTicket), encoding: null);
   if (response.statusCode == 200) {
     print('issueTicket - server responded 200 - OK .');
-    final transformU8Int = StreamTransformer<int, Uint8>.fromHandlers(handleData: (data, sink) {
+    final transformU8Int =
+        StreamTransformer<int, Uint8>.fromHandlers(handleData: (data, sink) {
       sink.add(data as Uint8);
     });
 
@@ -96,7 +108,8 @@ Future<FFUploadedFile?> issueTicket(
     }
     print('bytes length: ${bytes.length}');
 
-    FFUploadedFile eventPass = FFUploadedFile(name: "event.pkpass", bytes: Uint8List.fromList(bytes));
+    FFUploadedFile eventPass =
+        FFUploadedFile(name: "event.pkpass", bytes: Uint8List.fromList(bytes));
     return eventPass;
   } else {
     print("response: ${response.statusCode} - ${response.reasonPhrase}");

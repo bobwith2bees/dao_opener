@@ -19,4 +19,3 @@ export 'authenticate_credential.dart' show authenticateCredential;
 export 'issue_ticket.dart' show issueTicket;
 export 'add_to_wallet.dart' show addToWallet;
 export 'generate_proof_request.dart' show generateProofRequest;
-export 'verify_auth_response.dart' show verifyAuthResponse;
