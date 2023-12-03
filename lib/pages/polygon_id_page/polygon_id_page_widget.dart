@@ -282,7 +282,7 @@ class _PolygonIdPageWidgetState extends State<PolygonIdPageWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                     child: SelectionArea(
                         child: Text(
-                      'Scan the Request of Authenticate QR',
+                      'Scan a Credential or Proof Request QR',
                       textAlign: TextAlign.start,
                       maxLines: 3,
                       style: FlutterFlowTheme.of(context).bodyMedium,
