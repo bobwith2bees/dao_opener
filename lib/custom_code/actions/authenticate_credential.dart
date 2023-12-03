@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:polygonid_flutter_sdk/sdk/polygon_id_sdk.dart';
 import 'package:polygonid_flutter_sdk/iden3comm/domain/entities/common/iden3_message_entity.dart';
+import 'package:polygonid_flutter_sdk/common/data/exceptions/network_exceptions.dart';
 import 'dart:convert';
 
 class QrcodeParserUtils {
@@ -72,34 +73,20 @@ Future<String> authenticateCredential(String message) async {
   // Add your function code here!
 
   print('authenticateCredential -');
-  QrcodeParserUtils qrcodeParserUtils = QrcodeParserUtils(PolygonIdSdk.I);
 
-  // // Check for URI
-  // if (message.startsWith('iden3comm://?request_uri=')) {
-  //   String uriString = message.substring(25);
-  //   final response = await http.get(Uri.parse(uriString));
-  //   print('authenticateCredential - load from request_uri: $uriString');
-  //   if (response.statusCode == 200) {
-  //     message = response.body;
-  //     //print('authenticateCredential - message: $message');
-  //   } else {
-  //     print(
-  //         'authenticateCredential - unable to load $uriString, response: ${response.statusCode} ${response.reasonPhrase}');
-  //   }
-  // }
-  //
-  // try {
-  //   var messageDecoded = jsonDecode(message);
-  //   JsonEncoder encoder = JsonEncoder.withIndent('  ');
-  //   String prettyprint = encoder.convert(messageDecoded);
-  //   debugPrint(prettyprint);
-  // } on Exception catch (e) {
-  //print('authenticateCredential - message: $message');
-  // }
+  try {
+    var messageDecoded = jsonDecode(message);
+    JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    String prettyprint = encoder.convert(messageDecoded);
+    debugPrint(prettyprint);
+  } on Exception catch (e) {
+    print('authenticateCredential - message: $message');
+  }
+
+  QrcodeParserUtils qrcodeParserUtils = QrcodeParserUtils(PolygonIdSdk.I);
 
   Iden3MessageEntity iden3messageEntity;
   try {
-    // iden3messageEntity = await PolygonIdSdk.I.iden3comm.getIden3Message(message: message);
     iden3messageEntity =
         await qrcodeParserUtils.getIden3MessageFromQrCode(message);
   } on Exception catch (e) {
@@ -114,6 +101,8 @@ Future<String> authenticateCredential(String message) async {
       privateKey: FFAppState().idendityPrivateKey,
       profileNonce: null,
     );
+  } on NetworkException {
+    print('authenticateCredential - Network exception possibly the callback?');
   } on Exception catch (e) {
     print('authenticateCredential - error authenticating message $e');
     return "Error calling authenticate $e";

@@ -7,8 +7,13 @@ A new Flutter project.
 FlutterFlow projects are built to run on the Flutter _stable_ release.
 
 # IOS FlutterFlow issue
-https://github.com/FlutterFlow/flutterflow-issues/issues/1766
+* https://github.com/FlutterFlow/flutterflow-issues/issues/1766
+* com.fifithpint.daoopener.imageNotification
 
+# Polygon SDK Surprises
+* No emulator support
+* Known memory leak, so recommend beefier phones
+* No news is good news.  If there isn't a error thrown, keep going. No return codes.
 
 
 # Creating a credential
@@ -16,13 +21,13 @@ DAOMembership
 Schema: https://schema-builder.polygonid.me/schemas/60cdb980-55c2-4ee4-a6ca-9caad489cede
 JSON-LD Context: ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui
 * Used in the proof requests
-JSON schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
+  JSON schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
 * Used to import into the issuer ui
 
 ## Import Credential Schema
 * Navigate to https://issuer-ui.polygonid.me/schemas
 * Import Scheme
-* Url to Json Schema 
+* Url to Json Schema
 * * DAO Membership Schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
 * * MembershipCredential -> Preview import -> Import (Duplicate error ok)
 
@@ -32,11 +37,11 @@ JSON schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
 * * Spot check hash ed3d872056a5dbb516623dce8ddd26d9
 * Issue Credential
 * Direct issue (Selected by default)
-* Paste did for wallet. 
-* * e.g. did:polygonid:polygon:mumbai:2qGZqUP2LtnCubFS8MCF125qf67Kd8gkyWa4nU2qqu 
+* Paste did for wallet.
+* * e.g. did:polygonid:polygon:mumbai:2qGZqUP2LtnCubFS8MCF125qf67Kd8gkyWa4nU2qqu
 * Next Steps
 * DAO name
-** Mansplain DAO
+  ** Mansplain DAO
 * Is this person part of the DAO
 * 1 (the number)
 * Signature-based (SIG) should be selected by default
@@ -49,21 +54,21 @@ JSON schema URL: ipfs://QmeWR5QsDM3vSLLGryYH6shtYzCDYMPsLi3SiXGiuPHAmd
 * Verify Issued to identifier is correct from above (did:polygonid:polygon:mumbai:2qGZqUP2LtnCubFS8MCF125qf67Kd8gkyWa4nU2qqu)
 * Navigate using QR code Link
 
-* On App 
+* On App
 * Navigate to Polygon Screen
-* Tap QR code Scanner Button 
+* Tap QR code Scanner Button
 * Scan QR code
 * * QR text will appear in the text box
 * Tap Request credential button
 
 # Verify Credential
-* Navigate to https://verifier.polygonid.me/   (broken: https://verifier-demo.polygonid.me/  ) 
+* Navigate to https://verifier.polygonid.me/   (broken: https://verifier-demo.polygonid.me/  )
 * Select Custom from the dropdown box
 * Click Sign In button
 * Circuit ID - Credential Atomic Signature (Default)
 * URl (JSON-LD Context) ipfs://QmV2B1xLRUZfb2zLUg4xM3tVYJgUg1R9E7jGz6Hf6em2Ui
 * Type: MembershipCredential
-* Issuer: * 
+* Issuer: *
 * Field: PartOfTheDAO
 * Operator: GT
 * Value: 0
@@ -133,6 +138,13 @@ Other Notes:
 * Build Phases reorder to avoid bug (Anything with Embed has to go before copy scripts)
 * All the Firebase functions since their functions were too restrictive to use.
 
-
-# Passkit Generator
+# Passkit Generator - Firebase example
 * https://github.com/alexandercerutti/passkit-generator/tree/master/examples/firebase
+
+# Building App
+* flutter pub get
+
+# Building Firebase Functions
+* cd functions
+* npm install
+* firebase deploy --only functions   
