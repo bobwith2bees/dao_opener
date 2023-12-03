@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -405,6 +406,12 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        setState(() {
+                          _model.generatingProofRequest = true;
+                          _model.generatingProof = false;
+                          _model.generatingTicket = false;
+                          _model.ticketIssued = false;
+                        });
                         _model.eventTicket = await actions.issueTicket(
                           EventTypeStruct(
                             title: eventDetailsEventsRecord?.title,
@@ -428,6 +435,41 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           ),
                           'testing',
                         );
+                        setState(() {
+                          _model.ticketIssued = true;
+                        });
+                        final selectedFiles = await selectFiles(
+                          multiFile: false,
+                        );
+                        if (selectedFiles != null) {
+                          setState(() => _model.isDataUploading = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
+
+                          try {
+                            selectedUploadedFiles = selectedFiles
+                                .map((m) => FFUploadedFile(
+                                      name: m.storagePath.split('/').last,
+                                      bytes: m.bytes,
+                                    ))
+                                .toList();
+                          } finally {
+                            _model.isDataUploading = false;
+                          }
+                          if (selectedUploadedFiles.length ==
+                              selectedFiles.length) {
+                            setState(() {
+                              _model.uploadedLocalFile =
+                                  selectedUploadedFiles.first;
+                            });
+                          } else {
+                            setState(() {});
+                            return;
+                          }
+                        }
+
+                        await actions.addToWallet(
+                          _model.uploadedLocalFile,
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -440,9 +482,6 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             backgroundColor:
                                 FlutterFlowTheme.of(context).secondary,
                           ),
-                        );
-                        await actions.addToWallet(
-                          _model.eventTicket,
                         );
 
                         setState(() {});
