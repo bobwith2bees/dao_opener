@@ -23,22 +23,25 @@ class EventDetailsModel extends FlutterFlowModel<EventDetailsWidget> {
 
   bool generatingTicket = false;
 
-  bool? ticketIssued;
+  bool? ticketIssued = false;
 
   String? proofRequest = '';
+
+  bool credentialAuthenticated = false;
+
+  bool proofRequestGenerated = false;
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Custom Action - generateProofRequest] action in button_2 widget.
+  // Stores action output result for [Custom Action - generateProofRequest] action in Button widget.
   dynamic? proofRequestOutput;
-  // Stores action output result for [Custom Action - authenticateCredential] action in button_2 widget.
-  String? authenticateResult;
-  // Stores action output result for [Custom Action - issueTicket] action in button_2 widget.
-  FFUploadedFile? eventTicket;
+  // Stores action output result for [Custom Action - authenticateCredential] action in Button widget.
+  String? authenticateResuls;
+  // Stores action output result for [Custom Action - issueTicket] action in Button widget.
+  FFUploadedFile? eventTicketCopy;
   bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+  FFUploadedFile uploadedLocalFile = FFUploadedFile(bytes: Uint8List.fromList([]));
 
   /// Initialization and disposal methods.
 
