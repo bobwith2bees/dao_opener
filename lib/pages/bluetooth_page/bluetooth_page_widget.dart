@@ -144,7 +144,7 @@ class _BluetoothPageWidgetState extends State<BluetoothPageWidget>
             },
           ),
           title: Text(
-            'Bluetooth Screen',
+            'Bluetooth Dev',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
                   color: Colors.white,

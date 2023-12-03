@@ -9,6 +9,7 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'event_details_model.dart';
@@ -89,25 +90,33 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+              backgroundColor: FlutterFlowTheme.of(context).primary,
               automaticallyImplyLeading: false,
               leading: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
-                  Icons.arrow_back_rounded,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                icon: FaIcon(
+                  FontAwesomeIcons.angleLeft,
+                  color: Colors.white,
                   size: 30.0,
                 ),
                 onPressed: () async {
                   context.pop();
                 },
               ),
+              title: Text(
+                'Events',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Open Sans',
+                      color: Colors.white,
+                      fontSize: 22.0,
+                    ),
+              ),
               actions: [],
               centerTitle: true,
-              elevation: 0.0,
+              elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
