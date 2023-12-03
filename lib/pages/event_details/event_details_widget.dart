@@ -414,7 +414,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       },
                     ),
                   ),
-                  if (!_model.ticketIssued! && _model.proofRequestGenerated)
+                  if (!_model.ticketIssued! && !_model.credentialAuthenticated)
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
