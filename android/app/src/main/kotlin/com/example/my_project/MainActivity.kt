@@ -1,4 +1,4 @@
-package com.fifithpint.daoopener
+package com.fifthpint.daoopener
 
 import io.flutter.embedding.android.FlutterActivity
 
