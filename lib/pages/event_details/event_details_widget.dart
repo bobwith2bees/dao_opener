@@ -123,112 +123,51 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
-                    child: StreamBuilder<List<EventsRecord>>(
-                      stream: queryEventsRecord(
-                        singleRecord: true,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: SpinKitPulse(
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 50.0,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                            child: Container(
+                              width: double.infinity,
+                              constraints: BoxConstraints(
+                                maxWidth: 570.0,
                               ),
-                            ),
-                          );
-                        }
-                        List<EventsRecord> scrollingColumnEventsRecordList = snapshot.data!;
-                        // Return an empty Container when the item does not exist.
-                        if (snapshot.data!.isEmpty) {
-                          return Container();
-                        }
-                        final scrollingColumnEventsRecord =
-                            scrollingColumnEventsRecordList.isNotEmpty ? scrollingColumnEventsRecordList.first : null;
-                        return SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  constraints: BoxConstraints(
-                                    maxWidth: 570.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                    child: Column(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
                                       mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Flexible(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 2.0, 2.0),
-                                                child: ClipRRect(
-                                                  borderRadius: BorderRadius.circular(10.0),
-                                                  child: Image.network(
-                                                    'https://firebasestorage.googleapis.com/v0/b/fifthpint-common-dev.appspot.com/o/logos%2Flogo.png?alt=media&token=6fe98646-b9c6-4d46-af33-b7c05dd3cc9a',
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    fit: BoxFit.contain,
-                                                  ),
-                                                ),
+                                        Flexible(
+                                          child: Padding(
+                                            padding: EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 2.0, 2.0),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(10.0),
+                                              child: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/fifthpint-common-dev.appspot.com/o/logos%2Flogo.png?alt=media&token=6fe98646-b9c6-4d46-af33-b7c05dd3cc9a',
+                                                width: 50.0,
+                                                height: 50.0,
+                                                fit: BoxFit.contain,
                                               ),
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                                              child: Text(
-                                                dateTimeFormat(
-                                                  'MMMMEEEEd',
-                                                  eventDetailsEventsRecord!.startTime!,
-                                                  locale: FFLocalizations.of(context).languageCode,
-                                                ),
-                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                      fontFamily: 'Inter',
-                                                      color: FlutterFlowTheme.of(context).primary,
-                                                    ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(2.0, 8.0, 2.0, 8.0),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(10.0),
-                                            child: Image.network(
-                                              'https://firebasestorage.googleapis.com/v0/b/fifthpint-common-dev.appspot.com/o/events%2FhsYKqEldPvFM1OQHSoZm%2FeventBackground.png?alt=media&token=5f14215f-5f65-4f89-b7c5-f86ac953ca24',
-                                              width: double.infinity,
-                                              height: 230.0,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 12.0),
-                                          child: Text(
-                                            eventDetailsEventsRecord!.title,
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context).headlineMedium,
                                           ),
                                         ),
                                         Padding(
                                           padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                                           child: Text(
                                             dateTimeFormat(
-                                              'relative',
+                                              'MMMMEEEEd',
                                               eventDetailsEventsRecord!.startTime!,
                                               locale: FFLocalizations.of(context).languageCode,
                                             ),
@@ -238,87 +177,121 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                                 ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 12.0),
-                                          child: Text(
-                                            eventDetailsEventsRecord!.description,
-                                            style: FlutterFlowTheme.of(context).labelMedium,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
-                                          child: Container(
-                                            width: double.infinity,
-                                            constraints: BoxConstraints(
-                                              maxWidth: 570.0,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: FlutterFlowTheme.of(context).secondaryBackground,
-                                              borderRadius: BorderRadius.circular(12.0),
-                                              border: Border.all(
-                                                color: FlutterFlowTheme.of(context).alternate,
-                                                width: 1.0,
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 4.0),
-                                                    child: Text(
-                                                      'Event Location',
-                                                      style: FlutterFlowTheme.of(context).labelMedium,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
-                                                    child: Text(
-                                                      eventDetailsEventsRecord!.venueName,
-                                                      style: FlutterFlowTheme.of(context).titleLarge,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
-                                                    child: Text(
-                                                      eventDetailsEventsRecord!.venueAddress,
-                                                      style: FlutterFlowTheme.of(context).labelMedium,
-                                                    ),
-                                                  ),
-                                                  Divider(
-                                                    thickness: 1.0,
-                                                    color: FlutterFlowTheme.of(context).accent4,
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 4.0),
-                                                    child: Text(
-                                                      'Ticket Requirements',
-                                                      style: FlutterFlowTheme.of(context).labelMedium,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
-                                                    child: Text(
-                                                      'Membership in a DAO',
-                                                      style: FlutterFlowTheme.of(context).titleLarge,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                       ],
                                     ),
-                                  ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(2.0, 8.0, 2.0, 8.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        child: Image.network(
+                                          'https://firebasestorage.googleapis.com/v0/b/fifthpint-common-dev.appspot.com/o/events%2FhsYKqEldPvFM1OQHSoZm%2FeventBackground.png?alt=media&token=5f14215f-5f65-4f89-b7c5-f86ac953ca24',
+                                          width: double.infinity,
+                                          height: 230.0,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 12.0),
+                                      child: Text(
+                                        eventDetailsEventsRecord!.title,
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context).headlineMedium,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                      child: Text(
+                                        dateTimeFormat(
+                                          'relative',
+                                          eventDetailsEventsRecord!.startTime!,
+                                          locale: FFLocalizations.of(context).languageCode,
+                                        ),
+                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                              fontFamily: 'Inter',
+                                              color: FlutterFlowTheme.of(context).primary,
+                                            ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 12.0),
+                                      child: Text(
+                                        eventDetailsEventsRecord!.description,
+                                        style: FlutterFlowTheme.of(context).labelMedium,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        constraints: BoxConstraints(
+                                          maxWidth: 570.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context).secondaryBackground,
+                                          borderRadius: BorderRadius.circular(12.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context).alternate,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 4.0),
+                                                child: Text(
+                                                  'Event Location',
+                                                  style: FlutterFlowTheme.of(context).labelMedium,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                                                child: Text(
+                                                  eventDetailsEventsRecord!.venueName,
+                                                  style: FlutterFlowTheme.of(context).titleLarge,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                                                child: Text(
+                                                  eventDetailsEventsRecord!.venueAddress,
+                                                  style: FlutterFlowTheme.of(context).labelMedium,
+                                                ),
+                                              ),
+                                              Divider(
+                                                thickness: 1.0,
+                                                color: FlutterFlowTheme.of(context).accent4,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 4.0),
+                                                child: Text(
+                                                  'Ticket Requirements',
+                                                  style: FlutterFlowTheme.of(context).labelMedium,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                                                child: Text(
+                                                  'Membership in a DAO',
+                                                  style: FlutterFlowTheme.of(context).titleLarge,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        );
-                      },
+                        ],
+                      ),
                     ),
                   ),
                   if (!_model.ticketIssued! && !_model.credentialAuthenticated)
@@ -457,6 +430,11 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             var selectedUploadedFiles = <FFUploadedFile>[];
 
                             try {
+                              showUploadMessage(
+                                context,
+                                'Uploading file...',
+                                showLoading: true,
+                              );
                               selectedUploadedFiles = selectedFiles
                                   .map((m) => FFUploadedFile(
                                         name: m.storagePath.split('/').last,
@@ -464,14 +442,23 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                       ))
                                   .toList();
                             } finally {
+                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
                               _model.isDataUploading = false;
                             }
                             if (selectedUploadedFiles.length == selectedFiles.length) {
                               setState(() {
                                 _model.uploadedLocalFile = selectedUploadedFiles.first;
                               });
+                              showUploadMessage(
+                                context,
+                                'Success!',
+                              );
                             } else {
                               setState(() {});
+                              showUploadMessage(
+                                context,
+                                'Failed to upload file',
+                              );
                               return;
                             }
                           }
@@ -495,7 +482,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
 
                           setState(() {});
                         },
-                        text: 'Issue Ticket',
+                        text: 'Issue Ticket (IOS)',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
@@ -515,7 +502,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         ),
                       ),
                     ),
-                  if (_model.ticketIssued ?? true)
+                  if (false)
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: FFButtonWidget(
