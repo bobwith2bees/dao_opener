@@ -23,6 +23,11 @@ Future<FFUploadedFile?> issueTicket(
 ) async {
   print('issueTicket - ');
 
+  if (Platform.isAndroid) {
+    print('issueTicket - Event tickets not supported on Android.');
+    return null;
+  }
+
   print('Event: ${eventData.title}, $eventData');
   // http post to a url with the body consisting of  json formatted eventReference.
   final url =
@@ -112,11 +117,6 @@ Future<FFUploadedFile?> issueTicket(
 
     FFUploadedFile eventPass =
         FFUploadedFile(name: "event.pkpass", bytes: Uint8List.fromList(bytes));
-
-    if (Platform.isAndroid) {
-      print('addToWallet - Event tickets not supported on Android.');
-      return eventPass;
-    }
 
     // Drop a copy in the appliation's document folder for save keeping, and the library flutter_wallet_card wants a file.
     final documentsDir = await getApplicationDocumentsDirectory();

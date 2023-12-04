@@ -519,7 +519,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
 
                           setState(() {});
                         },
-                        text: 'Issue Ticket',
+                        text: 'Issue Ticket (IOS)',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
