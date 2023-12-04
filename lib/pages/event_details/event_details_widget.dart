@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -499,50 +498,6 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             ),
                             'testing',
                           );
-                          final selectedFiles = await selectFiles(
-                            multiFile: false,
-                          );
-                          if (selectedFiles != null) {
-                            setState(() => _model.isDataUploading = true);
-                            var selectedUploadedFiles = <FFUploadedFile>[];
-
-                            try {
-                              showUploadMessage(
-                                context,
-                                'Uploading file...',
-                                showLoading: true,
-                              );
-                              selectedUploadedFiles = selectedFiles
-                                  .map((m) => FFUploadedFile(
-                                        name: m.storagePath.split('/').last,
-                                        bytes: m.bytes,
-                                      ))
-                                  .toList();
-                            } finally {
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                              _model.isDataUploading = false;
-                            }
-                            if (selectedUploadedFiles.length ==
-                                selectedFiles.length) {
-                              setState(() {
-                                _model.uploadedLocalFile =
-                                    selectedUploadedFiles.first;
-                              });
-                              showUploadMessage(
-                                context,
-                                'Success!',
-                              );
-                            } else {
-                              setState(() {});
-                              showUploadMessage(
-                                context,
-                                'Failed to upload file',
-                              );
-                              return;
-                            }
-                          }
-
                           setState(() {
                             _model.generatingTicket = false;
                             _model.ticketIssued = true;
@@ -592,10 +547,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          await actions.addToWallet(
-                            _model.uploadedLocalFile,
-                          );
+                        onPressed: () {
+                          print('Button pressed ...');
                         },
                         text: 'Add to Wallet',
                         options: FFButtonOptions(

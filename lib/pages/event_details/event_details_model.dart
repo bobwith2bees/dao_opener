@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'event_details_widget.dart' show EventDetailsWidget;
 import 'package:flutter/material.dart';
@@ -40,9 +39,6 @@ class EventDetailsModel extends FlutterFlowModel<EventDetailsWidget> {
   String? authenticateResuls;
   // Stores action output result for [Custom Action - issueTicket] action in Button widget.
   FFUploadedFile? eventTicketCopy;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
 
   /// Initialization and disposal methods.
 
