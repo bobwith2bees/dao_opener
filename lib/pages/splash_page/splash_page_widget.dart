@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,11 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(bluetoothPermission);
       _model.bluetoothEnabled = await actions.isBluetoothEnabled();
+      unawaited(
+        () async {
+          await actions.initPolygonSdk();
+        }(),
+      );
     });
   }
 

@@ -573,6 +573,17 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         ),
                       ),
                     ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        'assets/images/addToWallet.png',
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
